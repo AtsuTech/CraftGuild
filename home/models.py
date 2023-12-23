@@ -4,4 +4,8 @@ from wagtail.models import Page
 
 
 class HomePage(Page):
-    pass
+    subpage_types = [
+        #(アプリ名).(モデル名)
+        "mentor.MentorIntroductionPage",
+    ]
+

@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+
+{% block content %}
+
+    <h2 class="display-6 sub-banner-ctitle text-center" >{{ self.page_title }}</h2>  
+    <p>{{ self.page_explanation }}</p>
+
+
+    {% if mentors.count %}
+        {% for mentor in mentors.all %}
+            <div class="card mb-3">
+
+                <div class="col-md-3">
+                    {% image mentor.image fill-300x300 as mentor_img %}
+                    <img class=" card-img" src="{{ mentor_img.url }}" alt="{{ mentor_img.alt }}">
+                </div>
+                <h5>{{ mentor.name }}</h5>
+                <a href="{% pageurl mentor %}">詳細</a>
+
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>まだメンターがいません</p>
+    {% endif %}
+
+{% endblock %}
