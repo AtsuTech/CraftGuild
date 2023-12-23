@@ -7,5 +7,6 @@ class HomePage(Page):
     subpage_types = [
         #(アプリ名).(モデル名)
         "mentor.MentorIntroductionPage",
+        "form.FormPage",
     ]
 
