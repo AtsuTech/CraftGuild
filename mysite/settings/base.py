@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "form",
     "mentor",
     "home",
+    "introduction",
     "search",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",

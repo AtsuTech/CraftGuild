@@ -15,7 +15,7 @@ class MentorIntroductionPage(Page):
     #homeのHomePageが親ページになる
     #parent_page_types = ["home.HomePage"]
 
-    #template = "mentor_introduction_page.html"
+    template = "introduction/online_school_page.html"
 
 
     #ページのタイトル
