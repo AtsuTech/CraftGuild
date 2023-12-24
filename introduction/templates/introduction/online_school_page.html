@@ -106,29 +106,29 @@
 
     <div class="container">
 
-                <div class="text-center">
-                    <p>CraftGuildでモノづくり</p>
-                    <h3>メンター紹介</h3>
+        <div class="text-center">
+            <p>CraftGuildでモノづくり</p>
+            <h3>メンター紹介</h3>
+        </div>
+
+        {% load wagtailcore_tags wagtailimages_tags %}
+
+        {% if mentors.count %}
+            {% for mentor in mentors.all %}
+                <div class="">
+
+                    <div class="">
+                        {% image mentor.image fill-300x300 as mentor_img %}
+                        <img class="" src="{{ mentor_img.url }}" alt="{{ mentor_img.alt }}">
+                    </div>
+                    <h5>{{ mentor.name }}</h5>
+                    <a href="{% pageurl mentor %}">詳細</a>
+
                 </div>
-
-                {% load wagtailcore_tags wagtailimages_tags %}
-
-                {% if mentors.count %}
-                    {% for mentor in mentors.all %}
-                        <div class="">
-
-                            <div class="">
-                                {% image mentor.image fill-300x300 as mentor_img %}
-                                <img class="" src="{{ mentor_img.url }}" alt="{{ mentor_img.alt }}">
-                            </div>
-                            <h5>{{ mentor.name }}</h5>
-                            <a href="{% pageurl mentor %}">詳細</a>
-
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    <p>まだメンターがいません</p>
-                {% endif %}
+            {% endfor %}
+        {% else %}
+            <p>まだメンターがいません</p>
+        {% endif %}
 
     </div>
 
