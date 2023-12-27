@@ -16,3 +16,9 @@ header{
 main{
     /* background: #FFCC66; */
 }
+
+.logo-title{
+    font-family: 'Bai Jamjuree', sans-serif;
+    font-family: 'Carattere', cursive;
+    font-family: 'Caveat', cursive;
+}
