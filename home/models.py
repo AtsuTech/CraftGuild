@@ -8,5 +8,6 @@ class HomePage(Page):
         #(アプリ名).(モデル名)
         "mentor.MentorIntroductionPage",
         "form.FormPage",
+        "contents.ContentsSelectingPage",
     ]
 

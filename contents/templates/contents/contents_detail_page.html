@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+
+
+
+{% block content %}
+
+<main class="container">
+    <h1>{{ page.title }}</h1>
+    {% image page.cover_image fill-300x300 as mentor_img %}
+    <img class=" card-img" src="{{ mentor_img.url }}" alt="{{ mentor_img.alt }}" width="100%" height="90px">
+    <p>
+        {{ page.explanation|richtext }}
+    </p>
+
+    <a href="/mentors">戻る</a>
+</main>
+
+
+
+
+
+{% endblock %}

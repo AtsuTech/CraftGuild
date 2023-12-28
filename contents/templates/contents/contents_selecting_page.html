@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- 画像処理 -->
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+<main class="container">
+
+    {% if contents.count %}
+        {% for content in contents.all %}
+            <div class="row mt-2 mb-2">
+
+                <div class="col-3">
+                    {% image content.cover_image fill-300x300 as cover_image %}
+                    <img class=" card-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}">
+                </div>
+
+                <div class="col-9">
+                    <h3 class="card-title">{{ content.contents_name }}</h3>
+                    <p>{{ content.explanation|richtext }}</p>
+                    <a href="{% pageurl content %}">詳細</a>
+                </div>
+
+            </div>
+        {% endfor %}
+        {% else %}
+        <p>まだメンターがいません</p>
+    {% endif %}    
+
+</main>
+
+
+
+
+{% endblock %}
