@@ -26,6 +26,9 @@
                 </li>
                 {% if user.is_authenticated %}
                     <li class="nav-item">
+                        <a class="nav-link" href="/contents">コンテンツ</a>
+                    </li>
+                    <li class="nav-item">
                         <span class="nav-link">{{ user.get_username }}さん</span>
                     </li>
                     <li class="nav-item">
@@ -48,6 +51,3 @@
     </nav>
 </header>
 
-<script>
-    ak
-</script>

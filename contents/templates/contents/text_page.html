@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+# 画像処理
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+
+<main class="container">
+    <h1>{{ page.text_name }}</h1>
+
+    <div>
+        <!-- Add this: -->
+        {% with tags=page.tags.all %}
+        {% if tags %}
+            <div class="tags">
+                {% for tag in tags %}
+                    <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+    </div>
+
+    <div>
+        {% for category in page.categories.all %}
+                <a class="btn btn-outline-primary btn-sm m-1" href="" role="button">
+                    {{ category.name }}
+                </a>
+        {% endfor %}
+    </div>
+
+    {% image page.cover_image fill-300x300 as cover_image %}
+    <img class=" card-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100%" height="90px">
+    <p>
+        {{ page.body|richtext }}
+    </p>
+
+    <a href="/mentors">戻る</a>
+</main>
+
+
+
+
+{% endblock content %}

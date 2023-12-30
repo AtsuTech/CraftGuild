@@ -7,28 +7,45 @@
 
 {% block content %}
 
-<main class="container">
+<main>
 
+    <!-- タイトル部分 -->
+    <div style="background:#FFF;">
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <h1>コンテンツ</h1>
+            </div>
+        </div>
+
+    </div>
+
+    <div style="background:#FFCC66;">
     {% if contents.count %}
         {% for content in contents.all %}
-            <div class="row mt-2 mb-2">
+            <div class="container mt-2 mb-2">
 
-                <div class="col-3">
+                <div class="/row">
+                    <h3 class="card-title text-center pt-5 pb-2">{{ content.contents_name }}</h3>
+
                     {% image content.cover_image fill-300x300 as cover_image %}
-                    <img class=" card-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}">
-                </div>
+                    <img class="d-block w-100" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" height="200px">
 
-                <div class="col-9">
-                    <h3 class="card-title">{{ content.contents_name }}</h3>
                     <p>{{ content.explanation|richtext }}</p>
-                    <a href="{% pageurl content %}">詳細</a>
+
+                    <div class="d-flex align-items-center justify-content-center" style="height: 90px;">
+                        <a href="{% pageurl content %}" class="btn btn-secondary btn-lg">詳しくみる</a>
+                    </div>
+                    
+
                 </div>
 
             </div>
         {% endfor %}
-        {% else %}
+    {% else %}
         <p>まだメンターがいません</p>
     {% endif %}    
+    </div>
 
 </main>
 
