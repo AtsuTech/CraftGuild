@@ -34,6 +34,15 @@
         {# Original stylesheets (bootstrapより後に読み込みことでこのスタイルが上書きされる) #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/mysite.css' %}">
 
+        <!-- シンタックスハイライトの見た目カスタマイズ -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/syntax-hilight.css' %}">
+        
+        <!-- シンタックスハイライトCDN -->
+            <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/styles/agate.min.css">
+            <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.1/highlight.min.js"></script>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+        <!-- シンタックスハイライトCDN -->
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Bai+Jamjuree:wght@200&family=Carattere&display=swap" rel="stylesheet">
@@ -65,5 +74,12 @@
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
         {% endblock %}
+        <!-- <script>
+        hljs.highlightAll();
+        </script> -->    
+        <script>
+            hljs.highlightAll();
+            hljs.initLineNumbersOnLoad();  //行番号用の起動コードを追加
+        </script>        
     </body>
 </html>

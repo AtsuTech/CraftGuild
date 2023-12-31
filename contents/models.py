@@ -13,6 +13,7 @@ from taggit.models import TaggedItemBase, Tag as TaggitTag
 #　管理画面でタグとカテゴリ編集
 from wagtail.snippets.models import register_snippet
 
+from wagtailmarkdown.fields import MarkdownField
 
 
 
@@ -142,16 +143,17 @@ class TextPage(Page):
     )
 
     #　テキスト本文
-    body = RichTextField(
-        verbose_name="テキストの説明",
+    body = MarkdownField(
+        verbose_name="テキストの本文",
         blank=True,
         null=True,
     )
+    
 
     # カバー画像
     cover_image = models.ForeignKey(
         "wagtailimages.Image",
-        verbose_name="カバー写真",
+        verbose_name="カバー画像",
         blank=True,
         null=True,
         related_name="+",

@@ -4,6 +4,8 @@
 # 画像処理
 {% load wagtailcore_tags wagtailimages_tags %}
 
+{% load markdown_with_highlight %}
+
 
 {% block content %}
 
@@ -33,13 +35,23 @@
     </div>
 
     {% image page.cover_image fill-300x300 as cover_image %}
-    <img class=" card-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100%" height="90px">
+    <img class="cover-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100%" height="90px">
+    <!-- <p>
+        {% load wagtailmarkdown %}
+        {{ page.body|markdown }}
+    </p> -->
+
+
     <p>
-        {{ page.body|richtext }}
+        {{ page.body|markdown_with_highlight|safe }}
+        
     </p>
+
 
     <a href="/mentors">戻る</a>
 </main>
+
+
 
 
 

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "wagtail.search",
     "wagtail.admin",
     "wagtail",
+    "wagtailmarkdown",#markdoen
     "modelcluster",
     "taggit",
     "django.contrib.admin",
@@ -173,3 +174,29 @@ WAGTAILADMIN_BASE_URL = "http://example.com"
 
 LOGIN_REDIRECT_URL = '/'    # 追加
 LOGOUT_REDIRECT_URL = '/'
+
+# Markdownエディタ設定
+WAGTAILMARKDOWN = {
+    #"autodownload_fontawesome": False,
+    "allowed_tags": [],  # optional. a list of HTML tags. e.g. ['div', 'p', 'a']
+    "allowed_styles": [],  # optional. a list of styles
+    "allowed_attributes": {},  # optional. a dict with HTML tag as key and a list of attributes as value
+    "allowed_settings_mode": "extend",  # optional. Possible values: "extend" or "override". Defaults to "extend".
+    "extensions": [],  # optional. a list of python-markdown supported extensions
+    "extension_configs": {},  # optional. a dictionary with the extension name as key, and its configuration as value
+    "extensions_settings_mode": "extend",  # optional. Possible values: "extend" or "override". Defaults to "extend".
+}
+
+
+# WAGTAILRICHTEXTEDITORS = {
+#     'default': {
+#         'WIDGET': 'wagtailmarkdown.widgets.AdminMarkdownTextarea',
+#     },
+#     'markdown': {
+#         'WIDGET': 'wagtailmarkdown.widgets.AdminMarkdownTextarea',
+#     },
+# }
+
+WAGTAIL_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.codehilite',
+]
