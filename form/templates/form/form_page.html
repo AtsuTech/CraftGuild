@@ -1,11 +1,12 @@
 {% extends "base.html" %}
+
 {% load wagtailcore_tags %}
 
 {% block body_class %}template-formpage{% endblock %}
 
 {% block content %}
     <!-- タイトル部分 -->
-    <div style="background:#FFF;">
+    <!-- <div style="background:#FFF;">
 
         <div class="container">
             <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
@@ -13,18 +14,79 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
 
     {% if page.slug == 'contact-form' %}
-        <p>よくあるご質問</p>
+        {% include 'introduction/contact_page.html' %}
     {% endif %}
 
+    {% if page.slug == 'trial-classroom' %}
+        {% include 'introduction/trial_class_page.html' %}
+    {% endif %}
 
-    <div>{{ page.intro|richtext }}</div>
+    
 
-    <form class="page-form" action="{% pageurl page %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="Submit">Submit</button>
-    </form>
+    <div style="background:#FFF;">
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <div class="text-center">
+                    <span>
+                        <small class="small">CraftGuildでモノづくり</small>
+                    </span>
+                    <br>
+                    <span class="h1">
+                        {{ page.title }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+
+    <div style="background:#FFF;">
+
+        <div class="container pt-2 pb-2">  
+
+            <div>{{ page.intro|richtext }}</div>
+
+            <form class="page-form" action="{% pageurl page %}" method="POST">
+                {% csrf_token %}
+                {% if form.subject.errors %}
+                    <ol role="alertdialog">
+                    {% for error in form.subject.errors %}
+                        <li role="alert"><strong>{{ error|escape }}</strong></li>
+                    {% endfor %}
+                    </ol>
+                {% endif %}
+
+                {% for field in form %}
+
+                    {{ field.label_tag }}
+
+                    {% if field.field.required %}<span class="required">*</span>{% endif %}
+
+                    {% if field.label == '希望日時' %}
+                        <div class="field-outer-tag">
+                            <input type="datetime-local" name="{{field.name}}" id="id_{{field.name}}"/>
+                        </div>
+                        
+                        {% include 'form/calendar_field.html' %}
+
+                    {% else %}
+                        <div class="field-outer-tag">{{ field }}</div>
+                    {% endif %}
+
+                    
+                {% endfor %}
+                <button type="Submit" class="btn btn-primary">Submit</button>
+            </form>
+
+        </div>
+
+    </div>
+
+
+
 {% endblock content %}
+

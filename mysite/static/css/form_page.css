@@ -1,0 +1,39 @@
+.field-outer-tag{
+    width:100%;
+}
+
+.field-outer-tag input{
+    width:100%;
+    height: 2.4em;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 0 0 3px #ccc inset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+.field-outer-tag select{
+    width:100%;
+    height: 2.4em;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 0 0 3px #ccc inset;
+    appearance: none;
+}
+
+
+.field-outer-tag textarea{
+    width:100%;
+    height: 300px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 0 0 3px #ccc inset;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
