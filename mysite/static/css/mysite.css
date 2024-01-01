@@ -25,6 +25,9 @@ main{
 
 
 
+
+
+
 .highlight {
     background-color: #f8f8f8;
     border: 1px solid #ccc;
@@ -41,4 +44,24 @@ main{
     height: 150px;
     object-fit: cover; /* この一行を追加するだけ！ */
 
+}
+
+
+
+
+
+/* レスポンシブ設定 */
+@media screen and (max-width: 300px) {
+	/* 760px以下に適用されるCSS（PC用） */
+    .mb-dsip{
+        display: block;
+    }
+}
+
+@media screen and (max-width: 760px) {
+	/* 760px以下に適用されるCSS（PC用） */
+    /* 760px以上の時だけ表示する */
+    .pc-dsip{
+        display: none;
+    }
 }

@@ -4,12 +4,27 @@
 {% block body_class %}template-formpage{% endblock %}
 
 {% block content %}
-    <h1>{{ page.title }}</h1>
+    <!-- タイトル部分 -->
+    <div style="background:#FFF;">
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <span class="h1">{{ page.title }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    {% if page.slug == 'contact-form' %}
+        <p>よくあるご質問</p>
+    {% endif %}
+
+
     <div>{{ page.intro|richtext }}</div>
 
     <form class="page-form" action="{% pageurl page %}" method="POST">
         {% csrf_token %}
-        {{ form.as_div }}
+        {{ form.as_p }}
         <button type="Submit">Submit</button>
     </form>
 {% endblock content %}

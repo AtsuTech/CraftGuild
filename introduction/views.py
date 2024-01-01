@@ -7,6 +7,9 @@ from mentor.models import MentorDetailPage
 # 特徴のページ
 def feature_page(request):
 
+    #コンテンツのデータを取得しpostsに格納
+    mentors = MentorDetailPage.objects.live().public()
+
     return render(
         request,
         template_name="introduction/feature_page.html",

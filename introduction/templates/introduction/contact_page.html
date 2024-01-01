@@ -2,7 +2,13 @@
 {% load static %}
 
 
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-formpage{% endblock %}
+
+
 {% block content %}
+
 
 
 <!-- タイトル部分 -->
@@ -17,17 +23,48 @@
 </div>
 
 
+
 <div style="background:#FFCC66;">
 
     <div class="container">
-        <div class="">
-
+        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
             <div class="text-center">
-                <p>CraftGuildでモノづくり</p>
-                <h3>XXXXXXX</h3>
+                <span>
+                    <small class="small">CraftGuildでモノづくり</small>
+                </span>
+                <br>
+                <span class="h1">
+                    よくあるご質問
+                </span>
             </div>
-            
         </div>
+    </div>
+
+</div>
+
+
+<div style="background:#FFF;">
+
+    <div class="container">
+
+        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+            <div class="text-center">
+                <span>
+                    <small class="small">CraftGuildでモノづくり</small>
+                </span>
+                <br>
+                <span class="h1">
+                    お問合せフォーム
+                </span>
+            </div>
+        </div>
+
+        <form method="post" action="{% url 'wagtailadmin_pages:edit' page.id %}">
+
+            <input type="submit" name="_save" value="Save" class="button">
+        </form>
+
+
     </div>
 
 </div>
