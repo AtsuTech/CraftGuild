@@ -10,9 +10,9 @@ urlpatterns = [
     path('login/',
         LoginView.as_view(
             redirect_authenticated_user=True,
-            template_name='login.html'
+            template_name='accounts/login.html'
         ),
         name='login'),
 
-    path('logout/', LogoutView.as_view(template_name='logout.html'), name='logout'),
+    path('logout/', LogoutView.as_view(template_name='accounts/logout.html'), name='logout'),
 ]

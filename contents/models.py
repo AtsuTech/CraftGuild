@@ -15,7 +15,9 @@ from wagtail.snippets.models import register_snippet
 
 from wagtailmarkdown.fields import MarkdownField
 
-
+#from django.http import HttpResponseRedirect
+from django.shortcuts import redirect  
+from django.shortcuts import render
 
 
 #コンテンツの一覧のページ
@@ -39,15 +41,15 @@ class ContentsSelectingPage(Page):
     ]
 
 
-    def get_context(self, request, *args, **kwargs):
+    def get_context(self, request, *args, **kwargs):        
         context = super().get_context(request)
 
-        #メンターのデータを取得しpostsに格納
-        posts = ContentsDetailPage.objects.live().public()
+        #コンテンツのデータを取得しpostsに格納
+        contents = ContentsDetailPage.objects.live().public()
 
-        #postsを"contents"という名前で子ページで取り扱うようにする
-        context["contents"] = posts
-        
+        #"contents"という名前で子ページで取り扱うようにする
+        context["contents"] = contents
+
         return context
     
 
@@ -115,8 +117,9 @@ class TextCategory(models.Model):
     def __str__(self):
         return self.name
     class Meta:
+        #管理画面での表示
         verbose_name = "カテゴリ"
-        verbose_name_plural = "categories"
+        verbose_name_plural = "テキストのカテゴリ管理"
 
 # テキストのタグ
 class TextPageTag(TaggedItemBase):
@@ -130,6 +133,9 @@ class TextPageTag(TaggedItemBase):
 class Tag(TaggitTag):
     class Meta:
         proxy = True
+        #管理画面での表示
+        verbose_name = "タグ"
+        verbose_name_plural = "テキストのタグ管理"
 
 # テキスト
 class TextPage(Page):

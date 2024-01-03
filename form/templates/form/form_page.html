@@ -79,6 +79,10 @@
 
                     
                 {% endfor %}
+
+                {% for category in categories.all %}
+                        <p>{{category}}</p>
+                {% endfor %}
                 <button type="Submit" class="btn btn-primary">Submit</button>
             </form>
 

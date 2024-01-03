@@ -2,6 +2,7 @@ from django.shortcuts import render
 
 #メンターのモデルをインポート
 from mentor.models import MentorDetailPage
+from .models import QuestionPage
 
 
 # 特徴のページ
@@ -29,6 +30,8 @@ def online_school_page(request):
     )
 
 
+
+
 # 体験のページ
 def trial_class_page(request):
 
@@ -40,9 +43,14 @@ def trial_class_page(request):
 
 
 # お問合せのページ
-def contact_page(request):
+# def contact_page(request):
 
-    return render(
-        request,
-        template_name="introduction/contact_page.html",
-    )
+#     questions = QuestionPage.objects.all()
+
+
+
+#     return render(
+#         request,
+#         "introduction/contact_page.html",
+#         {'questions': questions}
+#     )

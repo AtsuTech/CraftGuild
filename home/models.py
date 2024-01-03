@@ -9,5 +9,6 @@ class HomePage(Page):
         "mentor.MentorIntroductionPage",
         "form.FormPage",
         "contents.ContentsSelectingPage",
+        "introduction.QuestionListingPage",
     ]
 

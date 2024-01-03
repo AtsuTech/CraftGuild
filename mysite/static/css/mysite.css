@@ -3,8 +3,11 @@
     padding:0;
 } */
 
+.wf-roundedmplus1c {  }
+
 body{
-    /* background: #FFCC66; */
+    /* フォント(M PLUS Rounded 1c) */
+    font-family: "M PLUS Rounded 1c";
 }
 
 header{
@@ -23,16 +26,92 @@ main{
     font-family: 'Caveat', cursive;
 }
 
+/* 背景色ーオレンジ */
+.theme-bg-orange{
+    background:#FFE8A3;
+    
+}
+
+/* 背景色ー薄いグレー */
+.theme-bg-gray{
+    background:#F7F7F7;
+}
 
 
+.bg-white{
+    background:#FFF;
+}
+
+.bg-skyblue{
+    background:#BDE3FF;
+}
 
 
-.highlight {
-    background-color: #f8f8f8;
-    border: 1px solid #ccc;
-    margin: 1em 0;
-    padding: 1em;
-    overflow: auto;
+.bg-orange{
+    background:#FCD19C;
+}
+
+.bg-rose{
+    background:#FCC7C2;
+}
+
+
+/* 円形タイトルパーツ */
+.circle-title{
+    width:80px;
+    height:80px;
+    border-radius:100%;
+}
+
+
+/* 角丸四角形BOX */
+.rounded-box{
+    width:100%;
+    padding:3px;
+    border-radius:20px;
+}
+
+
+/* 矢印↓ */
+.dli-arrow-down {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    position: relative;
+    width: 4px;
+    height:100px;
+    background-image : linear-gradient(to bottom, #555 13px, transparent 13px);
+    background-size: 10px 17px;
+    background-repeat: repeat-y;
+}
+
+/* 矢印↓ */
+.dli-arrow-down::before {
+    content: '';
+    width: 50px;
+    height: 50px;
+    border: 4px solid #555;
+    border-top: 0;
+    border-right: 0;
+    transform: rotate(-45deg);
+    transform-origin: bottom left;
+    position: absolute;
+    left: 50%;
+    bottom: -0.05em;
+    box-sizing: border-box;
+}
+
+/* 点線 */
+.dod-line{
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    position: relative;
+    width: 4px;
+    height:100px;
+    background-image : linear-gradient(to bottom, #555 13px, transparent 13px);
+    background-size: 10px 17px;
+    background-repeat: repeat-y;
 }
 
 

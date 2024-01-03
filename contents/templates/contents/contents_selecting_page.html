@@ -10,7 +10,7 @@
 <main>
 
     <!-- タイトル部分 -->
-    <div style="background:#FFF;">
+    <div>
 
         <div class="container">
             <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
@@ -20,24 +20,30 @@
 
     </div>
 
-    <div style="background:#FFCC66;">
+    <div class="theme-bg-orange">
     {% if contents.count %}
         {% for content in contents.all %}
-            <div class="container mt-2 mb-2">
+            <div class="container mt-2 /mb-2 p-4">
 
-                <div class="/row">
-                    <h3 class="card-title text-center pt-5 pb-2">{{ content.contents_name }}</h3>
+                <div class="/p-4 /d-flex align-items-center justify-content-center">
 
-                    {% image content.cover_image fill-300x300 as cover_image %}
-                    <img class="d-block w-100" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" height="200px">
+                    <div>
+                        <div class="card-title h3 text-center pt-5 pb-2">
+                            {{ content.contents_name }}
+                        </div>
 
-                    <p>{{ content.explanation|richtext }}</p>
+                        {% image content.cover_image fill-300x300 as cover_image %}
+                        <img class="d-block /w-100" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="70%" height="250px">
 
-                    <div class="d-flex align-items-center justify-content-center" style="height: 90px;">
-                        <a href="{% pageurl content %}" class="btn btn-secondary btn-lg">詳しくみる</a>
+                        <p>{{ content.explanation|richtext }}</p>
+
+                        <div class="d-flex align-items-center justify-content-center" style="height: 90px;">
+                            <a href="{% pageurl content %}" class="btn btn-secondary btn-lg">詳しくみる</a>
+                        </div>
                     </div>
-                    
 
+
+                    
                 </div>
 
             </div>

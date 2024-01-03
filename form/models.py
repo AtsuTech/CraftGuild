@@ -34,6 +34,9 @@ from wagtail.contrib.settings.models import (
 from wagtail.snippets.models import register_snippet
 
 
+from introduction.models import QuestionPage
+
+
 # ... keep the definition of NavigationSettings and FooterText. Add FormField and FormPage:
 class FormField(AbstractFormField):
     page = ParentalKey('FormPage', on_delete=models.CASCADE, related_name='form_fields')
@@ -61,3 +64,14 @@ class FormPage(AbstractEmailForm):
             FieldPanel('subject'),
         ], "Email"),
     ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request)
+
+        #メンターのデータを取得しpostsに格納
+        questions = QuestionPage.objects.live().public()
+
+        #postsを"mentors"という名前で子ページで取り扱うようにする
+        context["questions"] = questions
+        
+        return context
