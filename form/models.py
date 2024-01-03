@@ -36,6 +36,9 @@ from wagtail.snippets.models import register_snippet
 
 from introduction.models import QuestionPage
 
+#フォームに投稿されたデータの取得-あとで消すかも
+from wagtail.contrib.forms.models import FormSubmission
+
 
 # ... keep the definition of NavigationSettings and FooterText. Add FormField and FormPage:
 class FormField(AbstractFormField):
@@ -71,7 +74,43 @@ class FormPage(AbstractEmailForm):
         #メンターのデータを取得しpostsに格納
         questions = QuestionPage.objects.live().public()
 
+        #フォーム投稿の中から、体験授業のものだけフィルタ
+        submissions = FormSubmission.objects.filter(page_id=FormPage.objects.get(slug='trial-classroom').id)
+
+
+
+        resavaion = [
+            {
+                'time':'12:00',
+                'day':'月',
+            },
+
+                        {
+                'time':'15:00',
+                'day':'月',
+            }
+        ]
+        timeslots = [
+            '11:00',
+            '12:00',
+            '13:00',
+            '14:00',
+            '15:00',
+        ]
+        days = [
+            '月',
+            '火',
+            '水',
+            '金',
+            '土',
+        ]
+
         #postsを"mentors"という名前で子ページで取り扱うようにする
         context["questions"] = questions
+        context["timeslots"] = timeslots
+        context["days"] = days
+        context["submissions"] = submissions
+        context["resavaion"] = resavaion
+        # context["count"] = form_data
         
         return context

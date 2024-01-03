@@ -73,10 +73,35 @@
                         
                         {% include 'form/calendar_field.html' %}
 
+                        {% for day in days %}
+                            <div>{{day}}{{field.name}}</div>
+
+                            {% for timeslot in timeslots %}
+                                {{timeslot}}
+                                {% for res in resavaion %}
+                                <div>
+                                    
+                                    <!-- {% if timeslot == res.time %}
+                                    <span>maru
+                                    </span>
+                                    {% endif %} -->
+                                </div>
+                                {% endfor %}
+                            {% endfor %}
+
+                        {% endfor %}
+
+                        {% for timeslot in submissions %}
+                            <div>{{timeslot.form_data}}</div>
+                            {% with form_data=timeslot.form_data|json_script:"form_data" %}
+                                {{ form_data }}
+                            {% endwith %}
+                        {% endfor %}
+                        <div class="field-outer-tag">{{ count }}</div>
                     {% else %}
                         <div class="field-outer-tag">{{ field }}</div>
                     {% endif %}
-
+                    
                     
                 {% endfor %}
 
