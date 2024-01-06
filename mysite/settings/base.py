@@ -31,8 +31,10 @@ INSTALLED_APPS = [
     "home",
     "introduction",
     "search",
+    "trial_class_reservation",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
+    "wagtail.contrib.modeladmin",#Djangonのプレーンなモデルを使用するために追加(app:trial_class_reservationで使用)
     "wagtail.embeds",
     "wagtail.sites",
     "wagtail.users",

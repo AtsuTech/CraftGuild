@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- 画像処理 -->
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+<main>
+
+    <!-- タイトル部分 -->
+    <div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <div class="h1">体験授業(TEST)</div>
+            </div>
+        </div>
+
+    </div>
+
+    {{day}}
+
+    <div>
+
+        <div class="container">
+
+            <form action="/create/" method="post">
+                {% csrf_token %}
+                <input type="text" name="child_name1"><br>
+                <input type="text" name="child_name2"><br>
+                <input type="text" name="parent_name1"><br>
+                <input type="text" name="parent_name2"><br>
+                <input type="email" name="email"><br>
+                <input type="text" name="phone_number"><br>
+                希望日時<input type="text" name="schedule"><br>
+
+   
+                {% include 'trial_class_reservation/reservation_calendar.html' %}
+                
+
+                コンテンツ<input type="text" name="content"><br>
+                <textarea name="comment" id="" cols="30" rows="10"></textarea>
+                <button type="submit">Save</button>
+            </form>
+
+            <!-- <div class="theme-bg-orange">
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit">Save</button>
+                </form>
+            </div> -->
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+
+{% endblock %}

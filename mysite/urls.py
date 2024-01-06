@@ -15,6 +15,7 @@ urlpatterns = [
     path("search/", search_views.search, name="search"),
     path('', include('introduction.urls')),#追加
     path('', include('accounts.urls')),    # appアプリケーションのurls.pyを読み込むように追加
+    path('', include('trial_class_reservation.urls')),#追加
 ]
 
 

@@ -1,0 +1,45 @@
+<div>
+
+    カレンダー
+    {{parameter_value}}
+
+    <table class="table table-bordered">
+
+        <thead>
+            <th>-</th>
+            {% for week_day_arry in week_day_arry%}
+                <th>{{week_day_arry}}</th>
+            {% endfor %}
+        </thead>
+
+        <tbody>
+            {% for timeslot in timeslots %}
+                <tr>
+                    <td>
+                        {{timeslot.start_time}}
+                        <br>〜
+                        {{timeslot.end_time}}
+                    </td>
+
+                    {% for week_day_arry in week_day_arry%}
+                        <td>
+                        {% for schedule in schedules %}
+                            {% if schedule.timeslot_id == timeslot.id and schedule.date|date:"Y-m-d" == week_day_arry %}
+                            
+                                <input type="radio" id="dewey" name="schedule" value="{{schedule.id}}" />
+                            
+                            {% else %}  
+                            
+                            {% endif %}     
+                        {% endfor %}
+                        </td>
+                    {% endfor %}
+                     
+                </tr>
+            {% endfor %}
+        </tbody>
+
+
+    </table>
+
+</div>
