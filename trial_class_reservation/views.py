@@ -5,6 +5,8 @@ from .models import Schedule #スケジュールモデル
 from .models import ReservationForm #予約フォームモデルmoderu
 import datetime 
 import calendar #月の日数取得
+from django.core.mail import send_mail #メール送信処理
+from django.template.loader import render_to_string #メール送信の際、txtファイルの内容を読み込みメール本文として出力
 
 # Create your views here.
 
@@ -102,12 +104,40 @@ def post_reservation_form(request):
                 #スケジュールの定員数が予約数より大きい時だけ予約できる
                 form.save()
 
+
+                """題名"""
+                subject = "題名"
+                
+                #【本文】txtファイルを読み込み、本文として出力する
+                message=render_to_string(
+                    "mail/mail_message.txt", 
+                    {
+                        "child_name1":form.cleaned_data['child_name1'],
+                        "child_name2":form.cleaned_data['child_name2'],
+                        "parent_name1":form.cleaned_data['parent_name1'],
+                        "parent_name2":form.cleaned_data['parent_name2'],
+                        "email":form.cleaned_data['email'],
+                        "phone_number":form.cleaned_data['phone_number'],
+                        "date":form.cleaned_data['schedule'].date,
+                        "time":target_schedule.timeslot,
+                        "comment":form.cleaned_data['comment'],
+                    }
+                )
+
+                """送信元メールアドレス"""
+                from_email = "example@example.com"
+                """宛先メールアドレス"""
+                recipient_list = [
+                    form.cleaned_data['email']
+                ]
+                send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+
                 if (capacity - reservation_total) == 1:
                     #予約時点で定員の残りが1枠の場合、今回の予約で満員になるので対象のスケジュールの予約可否を否(false)にする
                     target_schedule.available = False
                     target_schedule.save()
 
-                return redirect('/')  # 保存後、一覧ページにリダイレクトするように変更
+                return redirect('/reservation/complete')  # 保存後、一覧ページにリダイレクトするように変更
             else:
                 #満員の時は予約フォーム画面に戻す
                 return redirect('/resavation/')
@@ -115,3 +145,8 @@ def post_reservation_form(request):
         form = PostReservationForm()
 
     return render(request, 'trial_class_reservation/reservation_form_page.html', {'form': form})
+
+
+#送信完了後の処理
+def post_complete(request):
+    return render(request, 'trial_class_reservation/reservation_complete.html')

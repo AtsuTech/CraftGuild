@@ -202,3 +202,15 @@ WAGTAILMARKDOWN = {
 WAGTAIL_MARKDOWN_EXTENSIONS = [
     'markdown.extensions.codehilite',
 ]
+
+#-------------------------メール送信(SMTPを使用)の設定-------------------------
+#本番の環境に合わせて内容を変更する
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # SMTPを使用する場合
+MAIL_HOST='smtp.gmail.com'
+MAIL_PORT=587
+EMAIL_USE_TLS = True  # TLSを使用する場合
+EMAIL_HOST_USER = 'your_username'
+EMAIL_HOST_PASSWORD = 'lhadbpfxrdgxxhkc'
+DEFAULT_FROM_EMAIL = 'atsushiabc1204@gmail.com'  # 送信元のメールアドレス
+#-------------------------ここまでメール送信(SMTPを使用)の設定-------------------------
+

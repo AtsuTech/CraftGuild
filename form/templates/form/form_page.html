@@ -5,26 +5,64 @@
 {% block body_class %}template-formpage{% endblock %}
 
 {% block content %}
-    <!-- タイトル部分 -->
-    <!-- <div style="background:#FFF;">
+
+
+    <div style="background:#FFF;">
 
         <div class="container">
             <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <span class="h1">{{ page.title }}</span>
+                <div class="text-center">
+                    <span class="h1">
+                        お問合せ
+                    </span>
+                </div>
             </div>
         </div>
 
-    </div> -->
+    </div>
 
-    {% if page.slug == 'contact-form' %}
-        {% include 'introduction/contact_page.html' %}
-    {% endif %}
 
-    {% if page.slug == 'trial-classroom' %}
-        {% include 'introduction/trial_class_page.html' %}
-    {% endif %}
+    <div style="background:#FFCC66;">
 
-    
+        <div class="container">
+
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <div class="text-center">
+                    <span>
+                        <small class="small">CraftGuildでモノづくり</small>
+                    </span>
+                    <br>
+                    <span class="h1">
+                        よくあるご質問
+                    </span>
+                </div>
+            </div>
+
+            <!-- formアプリケーションのmodels.py/FormPageクラスから値questionsを渡してる -->
+            {% if questions %}
+                {% for question in questions %}
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <span class="badge border border-2 border-warning rounded-3 bg-orange-300 /pl-3 /pr-3 text-dark fs-3">
+                                Q
+                            </span>
+                            <div class="border border-2 rounded-3 bg-white p-2">
+                                <p>{{ question.question|safe }}</p>
+                            </div>
+                            <div class="p-2">
+                                <p>{{ question.answer|safe }}</p>
+                            </div>
+                        </li>
+                    </ul>
+                {% endfor %}
+            {% else %}
+                <p>No questions found.</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+
 
     <div style="background:#FFF;">
 
@@ -36,7 +74,7 @@
                     </span>
                     <br>
                     <span class="h1">
-                        {{ page.title }}
+                        {{ page.title }}a
                     </span>
                 </div>
             </div>
@@ -48,7 +86,7 @@
 
         <div class="container pt-2 pb-2">  
 
-            <div>{{ page.intro|richtext }}</div>
+            <!-- <div>{{ page.intro|richtext }}</div> -->
 
             <form class="page-form" action="{% pageurl page %}" method="POST">
                 {% csrf_token %}
@@ -66,47 +104,10 @@
 
                     {% if field.field.required %}<span class="required">*</span>{% endif %}
 
-                    {% if field.label == '希望日時' %}
-                        <div class="field-outer-tag">
-                            <input type="datetime-local" name="{{field.name}}" id="id_{{field.name}}"/>
-                        </div>
-                        
-                        {% include 'form/calendar_field.html' %}
-
-                        {% for day in days %}
-                            <div>{{day}}{{field.name}}</div>
-
-                            {% for timeslot in timeslots %}
-                                {{timeslot}}
-                                {% for res in resavaion %}
-                                <div>
-                                    
-                                    <!-- {% if timeslot == res.time %}
-                                    <span>maru
-                                    </span>
-                                    {% endif %} -->
-                                </div>
-                                {% endfor %}
-                            {% endfor %}
-
-                        {% endfor %}
-
-                        {% for timeslot in submissions %}
-                            <div>{{timeslot.form_data}}</div>
-                            {% with form_data=timeslot.form_data|json_script:"form_data" %}
-                                {{ form_data }}
-                            {% endwith %}
-                        {% endfor %}
-                        <div class="field-outer-tag">{{ count }}</div>
-                    {% else %}
-                        <div class="field-outer-tag">{{ field }}</div>
-                    {% endif %}
+                    <div class="field-outer-tag">
+                        {{ field }}
+                    </div>
                     
-                    
-                {% endfor %}
-
-                {% for category in categories.all %}
-                        <p>{{category}}</p>
                 {% endfor %}
                 <button type="Submit" class="btn btn-primary">Submit</button>
             </form>

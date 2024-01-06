@@ -26,7 +26,7 @@
 
         <div class="container">
 
-            <form action="/create/" method="post">
+            <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post">
                 {% csrf_token %}
                 <input type="text" name="child_name1"><br>
                 <input type="text" name="child_name2"><br>
