@@ -38,6 +38,10 @@
 
         <!-- シンタックスハイライトの見た目カスタマイズ -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/syntax-hilight.css' %}">
+
+        <!-- 目次の見た目カスタマイズ -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/toc.css' %}">
+
         
         <!-- シンタックスハイライトCDN -->
 
@@ -84,6 +88,7 @@
         
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/text_toc.js' %}"></script>
 
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}

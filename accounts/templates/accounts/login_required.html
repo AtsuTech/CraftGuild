@@ -1,0 +1,63 @@
+<div class="container">
+    
+    <!-- <form method="post" action="{% url 'accounts:login' %}">
+        {% csrf_token %}
+
+        <div>
+            <div>
+                <label for="id_username">ユーザー名:</label>
+            </div>
+            <div>
+                <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" class="orginal-input-style">
+            </div>
+        </div>
+
+        <div>
+            <div>
+                <label for="id_password">パスワード:</label>
+            </div>
+            <div>
+                <input type="password" name="password" autocomplete="current-password" required id="id_password" class="orginal-input-style">
+            </div>
+        </div>
+
+        <button type="submit" class="orinal-button">ログイン</button>
+
+    </form> -->
+    <div class="main container-fluid">
+        <div class="row text-dark py-5">
+            <div class="col-md-8 offset-md-2">
+                <div class="h4 mt-4 mb-4">このページの閲覧はログインが必要です</div>
+                <form method="post" action="{% url 'accounts:login' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <div>
+                            <label for="id_username">ユーザー名</label>
+                        </div>
+                        <div>
+                            <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" class="orginal-input-style">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div>
+                            <label for="id_password">パスワード</label>
+                        </div>
+                        <div>
+                            <input type="password" name="password" autocomplete="current-password" required id="id_password" class="orginal-input-style">
+                        </div>
+                    </div>
+
+                    <div class="text-center pt-4 col-md-6 offset-md-3">
+                        <button type="submit" class="btn btn-warning btn-lg">ログイン</button>
+                        <!-- <button type="submit" class="orinal-button theme-bg-orange">ログイン</button> -->
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

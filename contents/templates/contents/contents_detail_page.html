@@ -3,83 +3,80 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 
-
-
-
 {% block content %}
 
 <main>
+    {% if user.is_authenticated %}
 
-    <div style="background:#FFF;">
+        <div style="background:#FFF;">
 
-        <div class="container">
-            <p><a href="{{ page.get_parent.url }}">←コンテンツ一覧に戻る</a></p>
-        </div>
-    
-    </div>
-
-    <div style="background:#FFF;">
-
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <h1>{{ page.contents_name }}</h1>
+            <div class="container">
+                <p><a href="{{ page.get_parent.url }}">←コンテンツ一覧に戻る</a></p>
             </div>
+        
         </div>
-    
-    </div>
 
+        <div style="background:#FFF;">
 
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                    <h1>{{ page.contents_name }}</h1>
+                </div>
+            </div>
+        
+        </div>
 
-  {% for category in categories.all %}
+        {% for category in categories.all %}
+        <div {% if forloop.counter|divisibleby:2 %}style="background:#FFF;"{% else %}style="background:#FFCC66;"{% endif %}>
+            <div class="container">{% if forloop.counter|divisibleby:2 %}<p>w</p>{% endif %}
+                <div class="row">
+                {% for text in page.get_children.specific %}
+                    
+                    {% if category in text.categories.all %}
 
-    <div {% if forloop.counter|divisibleby:2 %}style="background:#FFF;"{% else %}style="background:#FFCC66;"{% endif %}>
-        <div class="container">{% if forloop.counter|divisibleby:2 %}<p>w</p>{% endif %}
-            <div class="row">
-            {% for text in page.get_children.specific %}
-                
-                {% if category in text.categories.all %}
+                        {% ifchanged  %}
+                        <div>
 
-                    {% ifchanged  %}
-                    <div>
-
-                        <div class="container">
-                            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                                <div>
-                                    <small>{{ page.contents_name }}の</small><br>
-                                    <h3>{{ category.name }}</h3>
+                            <div class="container">
+                                <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                                    <div>
+                                        <small>{{ page.contents_name }}の</small><br>
+                                        <h3>{{ category.name }}</h3>
+                                    </div>
                                 </div>
                             </div>
+                        
                         </div>
-                    
-                    </div>
-                    {% endifchanged %}
+                        {% endifchanged %}
 
-                    <div class="col-3">
-                        {% if text.cover_image %}
-                            {% image text.cover_image fill-300x300 as cover_image %}
-                            <img class=" card-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100px">
-                        {% endif %}
-                        <a href="{% pageurl text %}">{{ text.text_name }}</a>
-                        {% with tags=text.tags.all %}
-                            {% if tags %}
-                                <div class="tags">
-                                    {% for tag in tags %}
-                                        <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
-                                    {% endfor %}
-                                </div>
+                        <div class="col-3">
+                            {% if text.cover_image %}
+                                {% image text.cover_image fill-300x300 as cover_image %}
+                                <img class=" card-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100px">
                             {% endif %}
-                        {% endwith %}
-                    </div>
+                            <a href="{% pageurl text %}">{{ text.text_name }}</a>
+                            {% with tags=text.tags.all %}
+                                {% if tags %}
+                                    <div class="tags">
+                                        {% for tag in tags %}
+                                            <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+                        </div>
 
-                {% endif %}
-                
-            {% endfor %}
+                    {% endif %}
+                    
+                {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-  {% endfor %}
+        {% endfor %}
 
-
+    {% else %}
+        {% include 'accounts/login_required.html' %}
+    {% endif %}
 </main>
 
 

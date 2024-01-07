@@ -10,55 +10,80 @@
 {% block content %}
 
 
-<main class="container">
-    
-    <!-- タイトル部分 -->
-    <div style="background:#FFF;">
+<main>
+    {% if user.is_authenticated %}
+        <div style="background:#FFF;">
 
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <h1>{{ page.text_name }}</h1>
+            <div class="container">
+                <p><a href="{{ page.get_parent.url }}">{{ page.title }}に戻る</a></p>
             </div>
+        
+        </div>
+        
+        <!-- タイトル部分 -->
+        <div style="background:#FFF;">
+
+            <div class="container">
+                <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+
+                    <div class="text-center">
+                        {% for category in page.categories.all %}
+                            <span class="badge rounded-pill text-bg-secondary">{{ category.name }}</span>
+                        {% endfor %}
+                        <br>
+                        <h1 class="mt-2">{{ page.text_name }}</h1>
+                    </div>
+
+                </div>
+            </div>
+
         </div>
 
-    </div>
+        <div class="theme-bg-orange pb-4">
 
-    <div>
-        <!-- Add this: -->
-        {% with tags=page.tags.all %}
-        {% if tags %}
-            <div class="tags">
-                {% for tag in tags %}
-                    <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
-                {% endfor %}
+            <div class="container">
+                <div>
+                    <!-- Add this: -->
+                    {% with tags=page.tags.all %}
+                    {% if tags %}
+                        <div class="tags">
+                            {% for tag in tags %}
+                                <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% endwith %}
+                </div>
+
+                <div class="/mt-4 /mb-4">
+                    {% image page.cover_image fill-300x300 as cover_image %}
+                    <img class="/cover-img mt-4" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100%" height="300px">    
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-8">
+                        <div class="w-100 bg-white p-2 rounded-3">
+                            <p>
+                                {{ page.body|markdown_with_highlight|safe }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- 目次 -->
+                    <div class="col-md-4">
+                        <div class="rendered-toc bg-white rounded-3"></div>
+                    </div>
+                </div>                 
+            
+
             </div>
-        {% endif %}
-        {% endwith %}
-    </div>
 
-    <div>
-        {% for category in page.categories.all %}
-                <a class="btn btn-outline-primary btn-sm m-1" href="" role="button">
-                    {{ category.name }}
-                </a>
-        {% endfor %}
-    </div>
+        </div>
 
-    {% image page.cover_image fill-300x300 as cover_image %}
-    <img class="cover-img" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100%" height="90px">
-    <!-- <p>
-        {% load wagtailmarkdown %}
-        {{ page.body|markdown }}
-    </p> -->
+    {% else %}
+        {% include 'accounts/login_required.html' %}
+    {% endif %}  
 
-
-    <p>
-        {{ page.body|markdown_with_highlight|safe }}
-        
-    </p>
-
-
-    <a href="/mentors">戻る</a>
 </main>
 
 

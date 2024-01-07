@@ -64,7 +64,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "wagtail.contrib.redirects.middleware.RedirectMiddleware",
-]
+]   
 
 ROOT_URLCONF = "mysite.urls"
 
@@ -173,7 +173,7 @@ WAGTAILSEARCH_BACKENDS = {
 # e.g. in notification emails. Don't include '/admin' or a trailing slash
 WAGTAILADMIN_BASE_URL = "http://example.com"
 
-
+LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'    # 追加
 LOGOUT_REDIRECT_URL = '/'
 
@@ -187,6 +187,7 @@ WAGTAILMARKDOWN = {
     "extensions": [],  # optional. a list of python-markdown supported extensions
     "extension_configs": {},  # optional. a dictionary with the extension name as key, and its configuration as value
     "extensions_settings_mode": "extend",  # optional. Possible values: "extend" or "override". Defaults to "extend".
+    "extensions": ["toc", "sane_lists"],
 }
 
 

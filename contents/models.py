@@ -18,6 +18,12 @@ from wagtailmarkdown.fields import MarkdownField
 #from django.http import HttpResponseRedirect
 from django.shortcuts import redirect  
 from django.shortcuts import render
+from django.http import HttpResponse
+#from django.contrib.auth.mixins import LoginRequiredMixin
+
+from django.contrib.auth.decorators import login_required
+#from wagtail.core import views as wagtail_views
+
 
 
 #コンテンツの一覧のページ
@@ -50,9 +56,8 @@ class ContentsSelectingPage(Page):
         #"contents"という名前で子ページで取り扱うようにする
         context["contents"] = contents
 
-        return context
+        return context        
     
-
 #コンテンツの詳細のページ
 class ContentsDetailPage(Page):
 
@@ -95,10 +100,7 @@ class ContentsDetailPage(Page):
         context = super().get_context(request, *args, **kwargs)
 
         categories = TextCategory.objects
-        # for category in categories:
-        #     blogpages = TextPage.objects.filter(tags__name=category.name)
         texts = TextPage.objects
-        #texts = TextPage.get_children(self)
 
 
         #postsを"contents"という名前で子ページで取り扱うようにする
@@ -186,8 +188,5 @@ class TextPage(Page):
         FieldPanel("body"),
         FieldPanel("cover_image"),
         FieldPanel('tags'),
-        # MultiFieldPanel([
-        #     FieldPanel('tags'),
-        # ], heading="タグ"),
         FieldPanel("categories"),
     ]

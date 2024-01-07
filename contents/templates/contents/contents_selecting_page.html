@@ -20,37 +20,41 @@
 
     </div>
 
-    <div class="theme-bg-orange">
-    {% if contents.count %}
-        {% for content in contents.all %}
-            <div class="container mt-2 /mb-2 p-4">
+    {% if user.is_authenticated %}
+        <div class="theme-bg-orange">
+        {% if contents.count %}
+            {% for content in contents.all %}
+                <div class="container mt-2 /mb-2 p-4">
 
-                <div class="/p-4 /d-flex align-items-center justify-content-center">
+                    <div class="/p-4 /d-flex align-items-center justify-content-center">
 
-                    <div>
-                        <div class="card-title h3 text-center pt-5 pb-2">
-                            {{ content.contents_name }}
+                        <div>
+                            <div class="card-title h3 text-center pt-5 pb-2">
+                                {{ content.contents_name }}
+                            </div>
+
+                            {% image content.cover_image fill-300x300 as cover_image %}
+                            <img class="d-block /w-100" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="70%" height="250px">
+
+                            <p>{{ content.explanation|richtext }}</p>
+
+                            <div class="d-flex align-items-center justify-content-center" style="height: 90px;">
+                                <a href="{% pageurl content %}" class="btn btn-secondary btn-lg">詳しくみる</a>
+                            </div>
                         </div>
 
-                        {% image content.cover_image fill-300x300 as cover_image %}
-                        <img class="d-block /w-100" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="70%" height="250px">
 
-                        <p>{{ content.explanation|richtext }}</p>
-
-                        <div class="d-flex align-items-center justify-content-center" style="height: 90px;">
-                            <a href="{% pageurl content %}" class="btn btn-secondary btn-lg">詳しくみる</a>
-                        </div>
+                        
                     </div>
 
-
-                    
                 </div>
-
-            </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <p>まだメンターがいません</p>
+        {% endif %}   
     {% else %}
-        <p>まだメンターがいません</p>
-    {% endif %}    
+        {% include 'accounts/login_required.html' %}
+    {% endif %}  
     </div>
 
 </main>
