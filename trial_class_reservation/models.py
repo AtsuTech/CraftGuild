@@ -65,7 +65,22 @@ class Schedule(models.Model):
         return f"{self.date}|{self.timeslot}"  
 
  
+class Content(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name="コンテンツ名",
+    )
 
+    image = models.ImageField(
+        upload_to='images/', 
+        verbose_name="イメージ画像",
+        null=True, 
+        blank=True
+    )
+
+    def __str__(self):
+        #return str(self.image.url)  # オブジェクトを識別するためのフィールドを指定
+        return f"{self.name}"  
 
 
 #体験予約フォームモデル
@@ -106,10 +121,13 @@ class ReservationForm(models.Model):
         verbose_name="希望日時",
     )
 
-    content = ParentalManyToManyField(
-        TextCategory,
+    content = models.ForeignKey(
+        #TextCategory,
+        Content,
+        on_delete=models.CASCADE,
         verbose_name="コンテンツのカテゴリ選択",
-        blank=True
+        default=1
+        #blank=True
     )
 
     comment = models.TextField(

@@ -14,34 +14,99 @@
 
         <div class="container">
             <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <div class="h1">体験授業(TEST)</div>
+                <div class="h1">体験授業</div>
             </div>
         </div>
 
     </div>
 
-    {{day}}
+    <div class="theme-bg-orange">
 
-    <div>
+        <div class="container">
+
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <div class="text-center">
+                    <span>
+                        <small class="small">CraftGuildでモノづくり</small>
+                    </span>
+                    <br>
+                    <span class="h1">
+                        体験の流れ
+                    </span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="theme-bg-gray">
 
         <div class="container">
 
             <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post">
                 {% csrf_token %}
-                <input type="text" name="child_name1"><br>
-                <input type="text" name="child_name2"><br>
-                <input type="text" name="parent_name1"><br>
-                <input type="text" name="parent_name2"><br>
-                <input type="email" name="email"><br>
-                <input type="text" name="phone_number"><br>
-                希望日時<input type="text" name="schedule"><br>
 
+                <div class="row /mt-4">
+                    <div class="col-md-6">
+                        <label for="">お子様の氏名(漢字)</label>
+                        <input type="text" name="child_name1" class="orginal-input-style">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">お子様の氏名(ふりがな)</label>
+                        <input type="text" name="child_name2" class="orginal-input-style">
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <label for="">保護者の氏名(漢字)</label>
+                        <input type="text" name="parent_name1" class="orginal-input-style">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">保護者の氏名(ふりがな)</label>
+                        <input type="text" name="parent_name2" class="orginal-input-style">
+                    </div>
+                </div>
+
+                <div  class="row mt-4">
+                    <div  class="col-md-12">
+                        <label for="">メールアドレス</label>
+                        <input type="email" name="email" class="orginal-input-style">
+                    </div>
+                </div>
+
+                <div  class="row mt-4">
+                    <div  class="col-md-12">
+                        <label for="">電話番号</label>
+                        <input type="text" name="phone_number" class="orginal-input-style">
+                    </div>
+                </div>
+                
+                
+                
+                
    
                 {% include 'trial_class_reservation/reservation_calendar.html' %}
+
+                <div>コンテンツ</div>
+
+                {% for content in contents %}
+                <div>
+
+                    <label for="">
+                        <img src="{{ content.image.url }}" alt="イメージ画像" width="100px">
+                        <div>{{ content.name }}</div>
+                    </label>
+                    
+                    <input type="radio" name="content" value="{{content.id}}"><br>
+                </div>
+                
+                {% endfor %}
                 
 
-                コンテンツ<input type="text" name="content"><br>
-                <textarea name="comment" id="" cols="30" rows="10"></textarea>
+                
+                <textarea name="comment" id="" cols="30" rows="10" class="orginal-textarea-style"></textarea>
                 <button type="submit">Save</button>
             </form>
 
@@ -58,8 +123,6 @@
     </div>
 
 </main>
-
-
 
 
 {% endblock %}

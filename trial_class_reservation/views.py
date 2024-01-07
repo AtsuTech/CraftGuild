@@ -2,8 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import PostReservationForm
 from .models import TimeSlot #時間割モデル
 from .models import Schedule #スケジュールモデル
-from .models import ReservationForm #予約フォームモデルmoderu
-import datetime 
+from .models import Content #予約フォームモデルmoderu
+from datetime import datetime #年月日の処理に使用
 import calendar #月の日数取得
 from django.core.mail import send_mail #メール送信処理
 from django.template.loader import render_to_string #メール送信の際、txtファイルの内容を読み込みメール本文として出力
@@ -15,7 +15,7 @@ def reservation_form_page(request):
 
 
     # 現在の日付を取得
-    current_date = datetime.datetime.today() 
+    current_date = datetime.today() 
 
     #現在の年
     year = current_date.year
@@ -62,7 +62,7 @@ def reservation_form_page(request):
     #スケジュールのデータをDBより取得
     schedules = Schedule.objects.all()
 
-    
+    contents = Content.objects.all()
 
     
 
@@ -72,6 +72,7 @@ def reservation_form_page(request):
         context={
             "timeslots": timeslots,
             "schedules": schedules,
+            "contents": contents,
             "week_day_arry":week_day_arry,
         }
     )

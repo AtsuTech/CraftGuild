@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdmin, ModelAdminGroup, modeladmin_register)
 from .models import (
-    TimeSlot, Schedule, ReservationForm)
+    TimeSlot, Schedule, Content, ReservationForm)
 
 
 class TimeSlotAdmin(ModelAdmin):
@@ -15,13 +15,19 @@ class TimeSlotAdmin(ModelAdmin):
 
 class ScheduleAdmin(ModelAdmin):
     model = Schedule
-    menu_label = '体験受授業のスケジュール設定'  # ditch this to use verbose_name_plural from model
+    menu_label = 'スケジュール設定'  # ditch this to use verbose_name_plural from model
     menu_icon = 'calendar'  # change as required
     # list_display = ('capacity')
     # list_filter = ('date')
     list_display = ('date', 'timeslot', 'capacity', 'available')  # Provide field names in a tuple or list
     list_filter = ('date', 'available')  #
     # search_fields = ('first_name', 'last_name')
+
+class ContentAdmin(ModelAdmin):
+    model = Content
+    menu_label = 'コンテンツ設定'  # ditch this to use verbose_name_plural from model
+    menu_icon = 'thumbtack'
+    list_display = ('name', 'image')
 
 
 class ReservationFormAdmin(ModelAdmin):
@@ -37,7 +43,7 @@ class TrialClassGroup(ModelAdminGroup):
     menu_label = '体験授業の管理'
     menu_icon = 'folder-open-inverse'  # change as required
     menu_order = 200  # will put in 3rd place (000 being 1st, 100 2nd)
-    items = (TimeSlotAdmin, ScheduleAdmin, ReservationFormAdmin)
+    items = (TimeSlotAdmin, ScheduleAdmin, ContentAdmin, ReservationFormAdmin)
 
 # When using a ModelAdminGroup class to group several ModelAdmin classes together,
 # you only need to register the ModelAdminGroup class with Wagtail:
