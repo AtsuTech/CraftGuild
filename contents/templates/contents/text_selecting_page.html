@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+<div>
+
+    <div>
+
+        <div class="container">
+            <p><a href="{{ page.get_parent.url }}">←コンテンツ一覧に戻る</a></p>
+        </div>
+    
+    </div>
+
+    <div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <h1>{{ page.contents_name }}</h1>
+            </div>
+        </div>
+    
+    </div>
+
+    {% if user.is_authenticated %}
+
+        
+        {% for category in categories.all %}
+        <div {% if forloop.counter|divisibleby:2 %}class="theme-bg-gray"{% else %}class="theme-bg-orange"{% endif %}>
+            <div class="container">
+                <div class="h2">{{category.name}}{{category.id}}</div>
+                {% for text in texts.all %}
+                    
+                    {% if category.id == text.categories_id %}
+                        <div>{{text.text_name}}{{text.categories_id}}</div>
+                        <a href="{% pageurl text %}">{{ text.text_name }}</a>
+                    {% endif %}
+
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        
+    {% else %}
+        {% include 'accounts/login_required.html' %}
+    {% endif %}
+</div>
+
+
+
+
+
+
+{% endblock %}

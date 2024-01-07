@@ -62,6 +62,7 @@ class ContentsSelectingPage(Page):
 class ContentsDetailPage(Page):
 
     #template = "mentor/mentor_detail_page.html"
+    template = "contents/text_selecting_page.html"
 
     #　コンテンツのタイトル
     contents_name = models.CharField(
@@ -176,11 +177,12 @@ class TextPage(Page):
     )
 
     #　カテゴリ
-    categories = ParentalManyToManyField(
-        'TextCategory',
-        verbose_name="カテゴリ",
-        blank=True
-        )
+    categories = models.ForeignKey(
+        TextCategory,
+        on_delete=models.CASCADE,
+        verbose_name="コンテンツのカテゴリ選択",
+        default=1,
+    )
 
     #管理画面で編集可能にするテーブルのカラム
     content_panels = Page.content_panels + [
