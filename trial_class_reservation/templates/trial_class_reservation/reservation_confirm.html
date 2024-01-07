@@ -1,0 +1,109 @@
+
+{% load static %}
+
+<!-- 画像処理 -->
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+
+
+<main>
+
+    <!-- タイトル部分 -->
+    <div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                <div class="h1">内容の確認</div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="theme-bg-gray">
+
+        <div class="container">
+
+            <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post"> 
+                
+                {% csrf_token %}
+
+                <div class="row /mt-4">
+                    <div class="col-md-6">
+                        <label for="">お子様の氏名(漢字)</label>
+                        <p id="confirm_child_name1"></p>
+                        <input type="hidden" name="child_name1" id="child_name1" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">お子様の氏名(ふりがな)</label>
+                        <p id="confirm_child_name2"></p>
+                        <input type="hidden" name="child_name2" id="child_name2" value="">
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <label for="">保護者の氏名(漢字)</label>
+                        <p id="confirm_parent_name1"></p>
+                        <input type="hidden" name="parent_name1" id="parent_name1" value="">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="">保護者の氏名(ふりがな)</label>
+                        <p id="confirm_parent_name2"></p>
+                        <input type="hidden" name="parent_name2" id="parent_name2" value="">
+                    </div>
+                </div>
+
+                <div  class="row mt-4">
+                    <div  class="col-md-12">
+                        <label for="">メールアドレス</label>
+                        <p id="confirm_email"></p>
+                        <input type="hidden" name="email" id="email" value="">
+                    </div>
+                </div>
+
+                <div  class="row mt-4">
+                    <div  class="col-md-12">
+                        <label for="">電話番号</label>
+                        <p id="confirm_phone_number"></p>
+                        <input type="hidden" name="phone_number" id="phone_number" value="">
+                    </div>
+                </div>
+
+                <div  class="row mt-4">
+                    <div  class="col-md-12">
+                        <label for="">希望の日程</label>
+                        <p id="confirm_schedule"></p>
+                        <input type="hidden" name="schedule" id="schedule" value="">
+                    </div>
+                </div>
+                
+
+                <div  class="row mt-4">
+                    <div  class="col-md-12">
+                        <label for="">コンテンツ</label>
+                        <p id="confirm_content"></p>
+                        <input type="hidden" name="content" id="content" value="">
+                    </div>
+                </div>
+
+                <div  class="row mt-4">
+                    <div  class="col-md-12">
+                        <label for="">自由記入欄</label>
+                        <p id="confirm_comment"></p>
+                        <input type="hidden" name="comment" id="comment" value="">
+                    </div>
+                </div>
+
+                
+
+                
+                <button type="submit" class="orinal-button bg-white">送信する</button>
+            </form>
+        </div>
+
+    </div>
+
+</main>
+
+

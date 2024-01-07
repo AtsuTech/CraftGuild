@@ -44,7 +44,9 @@
 
         <div class="container">
 
-            <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post">
+            <!-- <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post"> -->
+            <form action="#" id="reservation">
+                
                 {% csrf_token %}
 
                 <div class="row /mt-4">
@@ -96,10 +98,10 @@
 
                     <label for="">
                         <img src="{{ content.image.url }}" alt="イメージ画像" width="100px">
-                        <div>{{ content.name }}</div>
+                        <div>{{content.id}}{{ content.name }}</div>
                     </label>
                     
-                    <input type="radio" name="content" value="{{content.id}}"><br>
+                    <input type="radio" name="content" value="{{content.id}}" data-content="{{content.id}}{{content.name}}"><br>
                 </div>
                 
                 {% endfor %}
@@ -107,7 +109,7 @@
 
                 
                 <textarea name="comment" id="" cols="30" rows="10" class="orginal-textarea-style"></textarea>
-                <button type="submit">Save</button>
+                <button class="orinal-button bg-white">内容を確認</button>
             </form>
 
             <!-- <div class="theme-bg-orange">
@@ -119,6 +121,11 @@
             </div> -->
 
         </div>
+
+
+
+        {% include 'trial_class_reservation/reservation_confirm.html' %}
+
 
     </div>
 

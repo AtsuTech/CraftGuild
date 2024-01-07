@@ -80,23 +80,19 @@
 
 
 
-
+        {% include 'footer.html' %}
         
         {# Global javascript #}
         <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
 
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}
+            <script>
+                hljs.highlightAll();
+                hljs.initLineNumbersOnLoad();  //行番号用の起動コードを追加
+            </script>    
         {% endblock %}
-        <!-- <script>
-        hljs.highlightAll();
-        </script> -->    
 
-        {% include 'footer.html' %}
-
-        <script>
-            hljs.highlightAll();
-            hljs.initLineNumbersOnLoad();  //行番号用の起動コードを追加
-        </script>        
+    
     </body>
 </html>

@@ -64,6 +64,16 @@ def reservation_form_page(request):
 
     contents = Content.objects.all()
 
+    # #フォーム入力をセッションに保存
+    # if request.method == 'POST':
+    #     form = PostReservationForm(request.POST)
+    #     if form.is_valid():
+    #         # フォームが有効な場合、セッションにフォームのデータを保存して確認画面にリダイレクト
+    #         request.session['form_data'] = form.cleaned_data
+    #         return redirect('resavation/confirm/')
+    # else:
+    #     form = PostReservationForm()
+
     
 
     return render(
@@ -77,6 +87,15 @@ def reservation_form_page(request):
         }
     )
 
+
+#確認画面
+# def confirm_reservation(request):
+#     form_data = request.session.get('form_data', None)
+#     if not form_data:
+#         # セッションにデータがない場合はリダイレクトなどの処理
+#         pass
+
+#     return render(request, 'trial_class_reservation/reservation_confirm.html', {'form_data': form_data})
 
 
 #フォーム送信処理
