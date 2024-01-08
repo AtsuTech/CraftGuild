@@ -2,59 +2,52 @@
 {% load date_convert %}
 
 <div>
+    <div class="overflow-x-auto">
 
-    カレンダー
-    {{parameter_value}}
+        <table class="table table-bordered">
 
-        <div class="overflow-x-auto">
+            <thead class="text-center">
+                <th>-</th>
+                {% for week_day_arry in week_day_arry%}
+                    <th scope="col" >
+                        <div style="width: 60px;">
+                            {{week_day_arry|date_m_d}}<br/>                    
+                            {{week_day_arry|ja_week}}               
+                        </div>
+                    </th>
+                {% endfor %}
+            </thead>
 
-            <table class="table table-bordered">
+            <tbody>
+                {% for timeslot in timeslots %}
+                    <tr>
+                        <td>
+                            {{timeslot.start_time}}
+                            <br>〜
+                            {{timeslot.end_time}}
+                        </td>
 
-                <thead class="text-center">
-                    <th>-</th>
-                    {% for week_day_arry in week_day_arry%}
-                        <th scope="col" >
-                            <div style="width: 60px;">
-                                {{week_day_arry|date_m_d}}
-                                {{week_day_arry|ja_week}}
-                            </div>
-                        </th>
-                    {% endfor %}
-                </thead>
-
-                <tbody>
-                    {% for timeslot in timeslots %}
-                        <tr>
-                            <td>
-                                {{timeslot.start_time}}
-                                <br>〜
-                                {{timeslot.end_time}}
-                            </td>
-
-                            {% for week_day_arry in week_day_arry%}
-                                <td  style="width: 30px;">
-                                {% for schedule in schedules %}
-                                    {% if schedule.timeslot_id == timeslot.id and schedule.date|date:"Y-m-d" == week_day_arry %}
-                                    
-                                        <input type="radio" name="schedule" value="{{schedule.id}}" data-schedule="{{schedule.date}} {{timeslot.start_time}} 〜 {{timeslot.end_time}}" />
-                                    
-                                    {% else %}  
-                                    
-                                    {% endif %}     
-                                {% endfor %}
-                                </td>
+                        {% for week_day_arry in week_day_arry%}
+                            <td  style="width: 30px;">
+                            {% for schedule in schedules %}
+                                {% if schedule.timeslot_id == timeslot.id and schedule.date|date:"Y-m-d" == week_day_arry %}
+                                
+                                    <input type="radio" name="schedule" value="{{schedule.id}}" data-schedule="{{schedule.date}} {{timeslot.start_time}} 〜 {{timeslot.end_time}}" />
+                                
+                                {% else %}  
+                                
+                                {% endif %}     
                             {% endfor %}
-                            
-                        </tr>
-                    {% endfor %}
-                </tbody>
+                            </td>
+                        {% endfor %}
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
 
 
-            </table>
+        </table>
 
 
-        </div>
- 
-
-
+    </div>
 </div>

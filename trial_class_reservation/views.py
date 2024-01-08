@@ -3,7 +3,7 @@ from .forms import PostReservationForm
 from .models import TimeSlot #時間割モデル
 from .models import Schedule #スケジュールモデル
 from .models import Content #予約フォームモデルmoderu
-from datetime import datetime #年月日の処理に使用
+from datetime import datetime ,timedelta#年月日の処理に使用
 import calendar #月の日数取得
 from django.core.mail import send_mail #メール送信処理
 from django.template.loader import render_to_string #メール送信の際、txtファイルの内容を読み込みメール本文として出力
@@ -22,39 +22,49 @@ def reservation_form_page(request):
 
     #現在の月
     month = current_date.month
+    #month = 12
 
     #現在の日
     day = current_date.day
+    #day = 31
 
     #現在の曜日を数字(月:0-日:6)で取得
     weekday = current_date.weekday()
 
     #月曜スタートの1週間の開始の日にちを計算{(今日の日にち)ー(月曜起点の今日の曜日までの日数)}
     start_day = day - weekday
+    #start_day = 30
 
     #今月は全部で何日かを取得
     day_total_now_month = calendar.monthrange(year, month)[1]
 
-    #来月は全部で何日かを取得
-    day_total_next_month = calendar.monthrange(year, month+1)[1]
+    #今日の日付から、今月最終日の間の日にち
+    today_to_lastday =  (day_total_now_month - day) + 1
 
-    #今月から来月の2ヶ月間の合計日数
-    two_month_day_total = day_total_now_month + day_total_next_month
 
 
     #現在の日付を含んだ、月曜スタートの日にちを2ヶ月を配列に格納
-    week_day_arry = []
-    for i in range(start_day, start_day + two_month_day_total, 1):
-
-        #月と日にちは、zfill()メソッドで0埋めの2桁の表示に変換
-        date = str(year) + '-' + str(month).zfill(2) + '-' + str(i).zfill(2)
-
-        if i > day_total_now_month:
-
-            date = str(year) + '-' + str(month + 1).zfill(2) + '-' + str(i - day_total_now_month).zfill(2)
+    week_day_array = []
+   
 
 
-        week_day_arry.append(date)
+
+        #week_day_arry.append(date)
+                    
+    def generate_date_array():
+        today = datetime.now().date()
+        end_date = today + timedelta(days=60)
+
+        date_array = []
+
+        current_date = today
+        while current_date <= end_date:
+            date_array.append(current_date.strftime('%Y-%m-%d'))
+            current_date += timedelta(days=1)
+
+        return date_array
+
+    week_day_array = generate_date_array()                
 
     #時間割のデータをDBより取得
     timeslots = TimeSlot.objects.all()
@@ -64,18 +74,6 @@ def reservation_form_page(request):
 
     contents = Content.objects.all()
 
-    # #フォーム入力をセッションに保存
-    # if request.method == 'POST':
-    #     form = PostReservationForm(request.POST)
-    #     if form.is_valid():
-    #         # フォームが有効な場合、セッションにフォームのデータを保存して確認画面にリダイレクト
-    #         request.session['form_data'] = form.cleaned_data
-    #         return redirect('resavation/confirm/')
-    # else:
-    #     form = PostReservationForm()
-
-    
-
     return render(
         request,
         template_name="trial_class_reservation/reservation_form_page.html",
@@ -83,19 +81,9 @@ def reservation_form_page(request):
             "timeslots": timeslots,
             "schedules": schedules,
             "contents": contents,
-            "week_day_arry":week_day_arry,
+            "week_day_arry":week_day_array,
         }
     )
-
-
-#確認画面
-# def confirm_reservation(request):
-#     form_data = request.session.get('form_data', None)
-#     if not form_data:
-#         # セッションにデータがない場合はリダイレクトなどの処理
-#         pass
-
-#     return render(request, 'trial_class_reservation/reservation_confirm.html', {'form_data': form_data})
 
 
 #フォーム送信処理
