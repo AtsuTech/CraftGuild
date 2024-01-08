@@ -179,7 +179,7 @@ class TextPage(Page):
     #　カテゴリ
     categories = models.ForeignKey(
         TextCategory,
-        on_delete=models.CASCADE,
+        on_delete=models.PROTECT,
         verbose_name="コンテンツのカテゴリ選択",
         default=1,
     )
