@@ -37,8 +37,10 @@
 
         </div>
 
-        {% if page.categories.id == 1 and user.is_active == False %}
+        {% if not page.categories.id == 1 and user.user_type == 1 %}
 
+            {% include 'contents/unable_view_alert.html' %}
+            
         {% else %}
         <div class="theme-bg-orange pb-4">
 

@@ -31,10 +31,16 @@ class ContentsSelectingPage(Page):
 
     template = "contents/contents_selecting_page.html"
 
+    #追加できる子ページの種類を制限
+    subpage_types = [
+        #(アプリ名).(モデル名)
+        "contents.ContentsDetailPage",
+    ]
+
 
     #ページのタイトル
     page_title = models.CharField(
-        verbose_name="ページのタイトル(ここにはコンテンツの選択画面のページの名前を入力します)",
+        verbose_name="ここには”コンテンツ一覧”と入力してください",
         max_length=100,
         blank=True,
         null=True,
@@ -64,9 +70,15 @@ class ContentsDetailPage(Page):
     #template = "mentor/mentor_detail_page.html"
     template = "contents/text_selecting_page.html"
 
+    #追加できる子ページの種類を制限
+    subpage_types = [
+        #(アプリ名).(モデル名)
+        "contents.TextPage",
+    ]
+
     #　コンテンツのタイトル
     contents_name = models.CharField(
-        verbose_name="コンテンツのタイトル",
+        verbose_name="コンテンツのタイトル(例:Unity など)",
         max_length=100,
         blank=False,
         null=False,
@@ -153,7 +165,7 @@ class TextPage(Page):
 
     #　テキスト本文
     body = MarkdownField(
-        verbose_name="テキストの本文",
+        verbose_name="テキストの本文(マークダウン形式でご入力下さい)",
         blank=True,
         null=True,
     )
@@ -187,8 +199,8 @@ class TextPage(Page):
     #管理画面で編集可能にするテーブルのカラム
     content_panels = Page.content_panels + [
         FieldPanel("text_name"),
-        FieldPanel("body"),
         FieldPanel("cover_image"),
         FieldPanel('tags'),
         FieldPanel("categories"),
+        FieldPanel("body"),
     ]

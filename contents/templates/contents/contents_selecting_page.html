@@ -50,7 +50,9 @@
                 </div>
             {% endfor %}
         {% else %}
-            <p>まだメンターがいません</p>
+            <div class="d-flex align-items-center justify-content-center" style="height: 500px;">
+                <p>まだコンテンツが用意されていません</p>
+            </div>
         {% endif %}   
     {% else %}
         {% include 'accounts/login_required.html' %}
