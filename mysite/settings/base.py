@@ -21,6 +21,12 @@ BASE_DIR = os.path.dirname(PROJECT_DIR)
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 
+AUTH_USER_MODEL = 'users.User'
+WAGTAIL_USER_EDIT_FORM = 'users.admin.CustomUserEditForm'
+WAGTAIL_USER_CREATION_FORM = 'users.admin.CustomUserCreationForm'
+WAGTAIL_USER_CUSTOM_FIELDS = ['user_id','user_type']
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -30,6 +36,7 @@ INSTALLED_APPS = [
     "mentor",
     "home",
     "introduction",
+    "users",
     "search",
     "trial_class_reservation",
     "wagtail.contrib.forms",
