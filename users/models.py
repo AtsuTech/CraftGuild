@@ -10,7 +10,7 @@ class User(AbstractUser):
     user_id = models.CharField(verbose_name='user_id', max_length=30,blank=False,)
 
     #ユーザータイプ　(admin.pyで管理画面でドップダウン入力にする。valueの数字を保存する)
-    user_type = models.IntegerField(max_length=10,default=0,)
+    user_type = models.IntegerField(default=0)
         
         
     

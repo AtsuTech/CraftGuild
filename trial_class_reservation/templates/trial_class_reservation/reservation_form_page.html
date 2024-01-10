@@ -95,7 +95,9 @@
                 <div>
 
                     <label for="">
+                        {% if content.image %}
                         <img src="{{ content.image.url }}" alt="イメージ画像" width="100px">
+                        {% endif %}
                         <div>{{content.id}}{{ content.name }}</div>
                     </label>
                     
