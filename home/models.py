@@ -12,3 +12,5 @@ class HomePage(Page):
         "introduction.QuestionListingPage",
     ]
 
+    def get_admin_display_title(self):
+        return "CraftGuild"

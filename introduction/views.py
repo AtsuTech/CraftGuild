@@ -3,7 +3,8 @@ from django.shortcuts import render
 #メンターのモデルをインポート
 from mentor.models import MentorDetailPage
 from .models import QuestionPage
-from trial_class_reservation.models import Schedule
+#from event_calendar.models import EventCalendarItem
+#from trial_class_reservation.models import Schedule
 
 #import calendar
 from datetime import datetime
@@ -35,7 +36,7 @@ def online_school_page(request):
     cal = monthcalendar(year, month)
 
     # カレンダー内の各日に対応するイベントを取得
-    events = Schedule.objects.filter(date__year=year, date__month=month)
+    #events = EventCalendarItem.objects.filter(event_date__year=year, event_date__month=month)
 
     # カレンダーのデータを作成
     calendar_data = []
@@ -46,9 +47,9 @@ def online_school_page(request):
                 week_data.append({'day': '', 'events': []})
             else:
                 date = datetime(year, month, day)
-                day_events = events.filter(date=date)
-                week_data.append({'day': day, 'events': day_events})
-                #week_data.append({'day': day})
+                #day_events = events.filter(event_date=date)
+                #week_data.append({'day': day, 'events': day_events})
+                week_data.append({'day': day})
         calendar_data.append(week_data)
 
     return render(

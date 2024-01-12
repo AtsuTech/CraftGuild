@@ -16,23 +16,14 @@
 
 </div>
 
+{% include "mentor/mentor_introduction_page.html" %}
 
 <div class="theme-bg-orange pb-4">
 
     <div class="container">
         <!-- <div class=""> -->
 
-            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <div class="text-center">
-                    <span>
-                        <small class="small">CraftGuildでモノづくり</small>
-                    </span>
-                    <br>
-                    <span class="h1">
-                        コンテンツ
-                    </span>
-                </div>
-            </div>
+            {% include "introduction/menu_title_component.html" with menu_title="コンテンツ" %}
             
                 
                 <div class="row">
@@ -110,18 +101,7 @@
 <div class="theme-bg-gray">
     <div class="container">
 
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-            <div class="text-center">
-                <span>
-                    <small class="small">CraftGuildでモノづくり</small>
-                </span>
-                <br>
-                <span class="h1">
-                    身につくこと
-                </span>
-            </div>
-        </div>
-
+        {% include "introduction/menu_title_component.html" with menu_title="身につくこと" %}
         
         <div class="row d-flex align-items-center justify-content-center">
 
@@ -229,21 +209,7 @@
 
 <div class="theme-bg-orange pb-4">
 
-    <div class="container">
-
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-            <div class="text-center">
-                <span>
-                    <small class="small">CraftGuildでモノづくり</small>
-                </span>
-                <br>
-                <span class="h1">
-                    作成の流れ
-                </span>
-            </div>
-        </div>
-
-    </div>
+    {% include "introduction/menu_title_component.html" with menu_title="作成の流れ" %}
 
     <div class="container">
 
