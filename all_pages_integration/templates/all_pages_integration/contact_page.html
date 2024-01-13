@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- 画像処理 -->
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+<main>
+
+    <!-- タイトル部分 -->
+    {% include "components/page_header.html" with header="お問合せ" %}
+
+    <!-- 体験の流れ -->
+    <div class="theme-bg-orange">
+
+        <div class="container">
+            {% include "components/menu_title_component.html" with menu_title="よくある質問" %}
+        </div>
+
+    </div>
+
+    <!-- 申し込みフォーム -->
+    <div class="theme-bg-gray">
+
+
+    </div>
+
+</main>
+
+
+{% endblock %}

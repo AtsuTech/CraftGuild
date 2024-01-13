@@ -34,7 +34,7 @@ from wagtail.contrib.settings.models import (
 from wagtail.snippets.models import register_snippet
 
 #QuestionPageモデルをインポート
-from introduction.models import QuestionPage
+#from introduction.models import QuestionPage
 
 
 # ... keep the definition of NavigationSettings and FooterText. Add FormField and FormPage:
@@ -69,8 +69,8 @@ class FormPage(AbstractEmailForm):
         context = super().get_context(request)
 
         #Q&Aのデータを取得しpostsに格納
-        questions = QuestionPage.objects.live().public()
+        # questions = QuestionPage.objects.live().public()
         
-        context["questions"] = questions
+        # context["questions"] = questions
 
         return context

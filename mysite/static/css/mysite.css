@@ -145,6 +145,14 @@ main{
 }
 
 
+.img-size-w-max-h-300{
+    width: 300px;
+    height: 300px;
+}
+
+.img-style-cover{
+    object-fit: cover;
+}
 
 
 

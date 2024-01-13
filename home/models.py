@@ -9,7 +9,7 @@ class HomePage(Page):
         "mentor.MentorIntroductionPage",
         "form.FormPage",
         "contents.ContentsSelectingPage",
-        "introduction.QuestionListingPage",
+        "creation_flow.CreationFlow",
         "learn.LaenItemList",
     ]
 

@@ -7,6 +7,13 @@ from wagtail.admin.panels import FieldPanel
 
 class LaenItemList(Page):
 
+    #追加できる子ページの種類を制限
+    subpage_types = [
+        #(アプリ名).(モデル名)
+        "learn.LeanItem",
+    ]
+
+
     page_title = models.CharField( max_length=255, verbose_name="ページのタイトル")
 
     #管理画面で編集可能にするテーブルのカラム

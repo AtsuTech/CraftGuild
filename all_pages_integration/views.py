@@ -8,6 +8,8 @@ from contents.models import ContentsDetailPage #コンテンツのモデルを�
 from learn.models import LeanItem #身につくことのモデルをインポート
 from mentor.models import MentorDetailPage #身につくことのモデルをインポート
 
+from creation_flow.models import CreationFlowBlock #作成の流れのブロック
+from creation_flow.models import CreationFlowItem #作成の流れのアイテム
 
 
 from trial_class_reservation.forms import PostReservationForm
@@ -31,6 +33,9 @@ def feature_page(request):
 
     contents = ContentsDetailPage.objects.live().all()
     learns = LeanItem.objects.live().all()
+    creation_flow_blocks = CreationFlowBlock.objects.live().all()
+    creation_flow_item = CreationFlowItem.objects.live().all()
+     
 
     return render(
         request,
@@ -38,6 +43,8 @@ def feature_page(request):
          context={
             "contents": contents,
             "learns":learns,
+            "creation_flow_blocks":creation_flow_blocks,
+            "creation_flow_item":creation_flow_item,
         }
     )
 
@@ -144,6 +151,19 @@ def trial_class_page(request):
             "contents": contents,
             "week_day_arry":week_day_array,
         }
+    )
+
+#お問あわせのページ
+def contact_page(request):
+
+    # contents = ContentsDetailPage.objects.live().all()
+
+    return render(
+        request,
+        template_name="all_pages_integration/contact_page.html",
+        #  context={
+        #     "contents": contents,
+        # }
     )
 
 #コンテンツのページ
