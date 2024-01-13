@@ -2,40 +2,19 @@
 {% load static %}
 
 
-
-
-
 {% block content %}
 
 <!-- タイトル部分 -->
-<div style="background:#FFF;">
-
-    <div class="container">
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-            <div class="h1">オンライン教室</div>
-        </div>
-    </div>
-
-</div>
+{% include "components/page_header.html" with header="オンライン教室" %}
 
 <div class="theme-bg-orange pb-4">
 
     <div class="container">
         <div class="">
 
-            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <div class="text-center">
-                    <span>
-                        <small class="small">CraftGuildでのモノづくりの</small>
-                    </span>
-                    <br>
-                    <span class="h1">
-                        時間割
-                    </span>
-                </div>
-            </div>
+            {% include "components/menu_title_component.html" with menu_title="時間割り" %}
             
-            <div class="table-responsive"></div>
+            <!-- <div class="table-responsive"></div> -->
             <table class="table table-bordered border-3">
                 <thead>
                     <tr class="text-center">
@@ -225,7 +204,7 @@
             
         </div>
 
-        {% include 'introduction/calendar.html' %}
+        {% include 'components/calendar.html' %}
         
     </div>
 
@@ -279,6 +258,5 @@
     </div>
 
 </div>
-
 
 {% endblock content %}

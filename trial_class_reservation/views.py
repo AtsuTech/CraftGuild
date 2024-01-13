@@ -22,7 +22,6 @@ def reservation_form_page(request):
 
     #現在の月
     month = current_date.month
-    #month = 12
 
     #現在の日
     day = current_date.day
@@ -33,7 +32,6 @@ def reservation_form_page(request):
 
     #月曜スタートの1週間の開始の日にちを計算{(今日の日にち)ー(月曜起点の今日の曜日までの日数)}
     start_day = day - weekday
-    #start_day = 30
 
     #今月は全部で何日かを取得
     day_total_now_month = calendar.monthrange(year, month)[1]
@@ -46,10 +44,6 @@ def reservation_form_page(request):
     #現在の日付を含んだ、月曜スタートの日にちを2ヶ月を配列に格納
     week_day_array = []
    
-
-
-
-        #week_day_arry.append(date)
                     
     def generate_date_array():
         today = datetime.now().date()

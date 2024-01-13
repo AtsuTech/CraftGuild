@@ -1,0 +1,318 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+{% block content %}
+
+
+<!-- タイトル部分 -->
+<div style="background:#FFF;">
+
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+            <div class="h1">特徴</div>
+        </div>
+    </div>
+
+</div>
+
+
+<!-- コンテンツ -->
+<div class="theme-bg-orange pb-4">
+    <div class="container">
+        
+        {% include "components/menu_title_component.html" with menu_title="コンテンツ" %}
+        
+        <div class="row">
+            {% for content in contents %}
+                {% include "components/card_horizon_img_left.html" with img_src=content.cover_image card_title=content.contents_name card_body=content.explanation %}
+            {% endfor %}
+        </div>
+            
+    </div>
+</div>
+
+<!-- 身につくこと -->
+<div class="theme-bg-gray">
+    <div class="container">
+
+        {% include "components/menu_title_component.html" with menu_title="身につくこと" %}
+
+        {% for learn in learns %}
+            {% include "components/card_vertical_img_top.html" with img_src=learn.cover_image card_title=learn.item card_body=learn.description %}
+        {% endfor %}
+
+    </div>
+</div>
+
+
+<div class="theme-bg-orange pb-4">
+
+    {% include "introduction/menu_title_component.html" with menu_title="作成の流れ" %}
+
+    <div class="container">
+
+        <div style="position: relative;">
+            <div class="circle-title bg-skyblue d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;">
+                
+                <div class="text-center">
+                    <span>
+                        <small class="small">導入の</small>
+                    </span>
+                    <br>
+                    <span class="h4">20分</span>           
+                </div>
+
+            </div>
+            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
+
+                <div>
+                    <div class="h3 text-center mt-5">ミニミッションに挑戦!</div>
+                    <div class="col-md-4 m-5" style="width: 18rem;">
+                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                ミニミッション
+                            </h5>
+                            <p class="card-text pt-3">
+                                モノづくりに必要なスキルを
+                                ミニミッションで身につけていこう
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center">
+                <span class="dli-arrow-down"></span>
+            </div>
+        </div>
+
+        <div style="position: relative;">
+            <div class="circle-title bg-orange d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;">
+                
+                <div class="text-center">
+                    <span>
+                        <small class="small">制作の</small>
+                    </span>
+                    <br>
+                    <span class="h4">60分</span>           
+                </div>
+
+            </div>
+            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
+
+                <div>
+                    <div class="h3 text-center mt-5">モノづくりに挑戦!</div>
+
+                    <div class="row">
+                        <div class="col-md-4 m-5" style="width: 18rem;">
+                            <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                    モノづくりに
+                                </h5>
+                                <p class="card-text pt-3">
+                                    モノづくりに必要なスキルを
+                                    ミニミッションで身につけていこう
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 m-5" style="width: 18rem;">
+                            <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                    モノづくりに
+                                </h5>
+                                <p class="card-text pt-3">
+                                    モノづくりに必要なスキルを
+                                    ミニミッションで身につけていこう
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 m-5" style="width: 18rem;">
+                            <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                    モノづくりに
+                                </h5>
+                                <p class="card-text pt-3">
+                                    モノづくりに必要なスキルを
+                                    ミニミッションで身につけていこう
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 m-5" style="width: 18rem;">
+                            <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                    モノづくりに
+                                </h5>
+                                <p class="card-text pt-3">
+                                    モノづくりに必要なスキルを
+                                    ミニミッションで身につけていこう
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 m-5" style="width: 18rem;">
+                            <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                    モノづくりに
+                                </h5>
+                                <p class="card-text pt-3">
+                                    モノづくりに必要なスキルを
+                                    ミニミッションで身につけていこう
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center">
+                <span class="dli-arrow-down"></span>
+            </div>
+        </div>
+
+        <div style="position: relative;">
+            <div class="circle-title bg-rose d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;">
+                
+                <div class="text-center">
+                    <span>
+                        <small class="small">完成後は</small>
+                    </span>
+                    <br>
+                    <span class="h4">発表</span>           
+                </div>
+
+            </div>
+            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
+
+                <div>
+                    <div class="h3 text-center mt-5">ミニミッションに挑戦!</div>
+                    <div class="col-md-4 m-5" style="width: 18rem;">
+                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                ミニミッション
+                            </h5>
+                            <p class="card-text pt-3">
+                                モノづくりに必要なスキルを
+                                ミニミッションで身につけていこう
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="theme-bg-gray pb-4">
+    <div class="container">
+
+        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+            <div class="text-center">
+                <span>
+                    <small class="small">CraftGuildでモノづくり</small>
+                </span>
+                <br>
+                <span class="h1">
+                    こだわり
+                </span>
+            </div>
+        </div>
+
+
+        <div>
+            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="h3 text-center mt-5">最適な学びがある環境</div>
+                    <div class="col-md-4 m-5" style="width: 18rem;">
+                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                ミニミッション
+                            </h5>
+                            <p class="card-text pt-3">
+                                モノづくりに必要なスキルを
+                                ミニミッションで身につけていこう
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center">
+                <span class="dod-line"></span>
+            </div>
+        </div>
+
+        <div>
+            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="h3 text-center mt-5">最適な学びがある環境</div>
+                    <div class="col-md-4 m-5" style="width: 18rem;">
+                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                ミニミッション
+                            </h5>
+                            <p class="card-text pt-3">
+                                モノづくりに必要なスキルを
+                                ミニミッションで身につけていこう
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-center">
+                <span class="dod-line"></span>
+            </div>
+        </div>
+
+        <div>
+            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="h3 text-center mt-5">最適な学びがある環境</div>
+                    <div class="col-md-4 m-5" style="width: 18rem;">
+                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
+                                ミニミッション
+                            </h5>
+                            <p class="card-text pt-3">
+                                モノづくりに必要なスキルを
+                                ミニミッションで身につけていこう
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock content %}

@@ -31,11 +31,13 @@ WAGTAIL_USER_CUSTOM_FIELDS = ['user_id','user_type']
 
 INSTALLED_APPS = [
     "accounts",
+    "all_pages_integration",
     "contents",
     "form",
     "mentor",
     "home",
     "introduction",
+    "learn",
     "users",
     "search",
     "trial_class_reservation",

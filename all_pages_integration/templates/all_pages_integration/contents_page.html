@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load static %}
+
+<!-- 画像処理 -->
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+<main>
+
+    <!-- タイトル部分 -->
+    {% include "components/page_header.html" with header="コンテンツ" %}
+
+    {% if user.is_authenticated %}
+        <div class="theme-bg-orange">
+        {% include "components/menu_title_component.html" with menu_title="コンテンツ" %}
+
+        {% if contents.count %}
+            {% for content in contents.all %}
+                <div class="container mt-2 /mb-2 p-4">
+
+                    <div class="/p-4 /d-flex align-items-center justify-content-center">
+
+                        <div>
+                            <div class="card-title h2 text-center pt-5 pb-5">
+                                {{ content.contents_name }}
+                            </div>
+
+                            {% image content.cover_image fill-300x300 as cover_image %}
+                            <img class="d-block w-100" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="70%" height="250px">
+
+                            <p>{{ content.explanation|richtext }}</p>
+
+                            <div class="d-flex align-items-center justify-content-center" style="height: 90px;">
+                                <a href="{% pageurl content %}" class="orinal-button bg-white">詳しくみる</a>
+                            </div>
+                        </div>
+
+
+                        
+                    </div>
+
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="d-flex align-items-center justify-content-center" style="height: 500px;">
+                <p>まだコンテンツが用意されていません</p>
+            </div>
+        {% endif %}   
+    {% else %}
+        {% include 'accounts/login_required.html' %}
+    {% endif %}  
+    </div>
+
+</main>
+
+
+
+
+{% endblock %}
