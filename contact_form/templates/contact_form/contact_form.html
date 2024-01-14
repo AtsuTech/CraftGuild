@@ -1,0 +1,70 @@
+
+<form action="#" id="contact">
+    {% csrf_token %}
+    <div class="row /mt-4">
+        <div class="col-md-6">
+            <label for="">お子様の氏名(漢字)</label>
+            <input type="text" name="child_name1" class="orginal-input-style">
+        </div>
+        <div class="col-md-6">
+            <label for="">お子様の氏名(ふりがな)</label>
+            <input type="text" name="child_name2" class="orginal-input-style">
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-6">
+            <label for="">保護者の氏名(漢字)</label>
+            <input type="text" name="parent_name1" class="orginal-input-style">
+        </div>
+        <div class="col-md-6">
+            <label for="">保護者の氏名(ふりがな)</label>
+            <input type="text" name="parent_name2" class="orginal-input-style">
+        </div>
+    </div>
+
+    <div  class="row mt-4">
+        <div  class="col-md-12">
+            <label for="">メールアドレス</label>
+            <input type="email" name="email" class="orginal-input-style">
+        </div>
+    </div>
+
+    <div  class="row mt-4">
+        <div  class="col-md-12">
+            <label for="">電話番号</label>
+            <input type="text" name="phone_number" class="orginal-input-style">
+        </div>
+    </div>
+
+    <div  class="row mt-4">
+        <div  class="col-md-12">
+            <label for="">選択</label>
+            <select name="contact_category" id="" class="orginal-input-style">
+                <option value="">内容を選択してくだい</option>
+                {% for category in categorise %}
+                    <option value="{{category.id}}" data-contact_category="{{category.option}}">{{category.option}}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+
+    <div  class="row mt-4">
+        <div  class="col-md-12">
+            <label for="">自由記入欄</label>
+            <textarea name="comment" id="" cols="30" rows="10" class="orginal-textarea-style"></textarea>
+        </div>
+    </div>
+
+    <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+        <button type="submit" class="orinal-button bg-white">内容の確認</button>
+    </div>
+</form>
+
+
+
+<!-- 確認画面 -->
+{% include 'contact_form/contact_confirm.html' %}
+
+
+

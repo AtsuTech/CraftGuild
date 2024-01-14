@@ -16,6 +16,9 @@ from trial_class_reservation.forms import PostReservationForm
 from trial_class_reservation.models import TimeSlot #時間割モデル
 from trial_class_reservation.models import Schedule #スケジュールモデル
 from trial_class_reservation.models import Content #予約フォームモデルmoderu
+
+from contact_form.models import ContactCategory
+
 from datetime import datetime ,timedelta#年月日の処理に使用
 import calendar #月の日数取得
 from django.core.mail import send_mail #メール送信処理
@@ -160,13 +163,14 @@ def trial_class_page(request):
 def contact_page(request):
 
     # contents = ContentsDetailPage.objects.live().all()
+    categorise = ContactCategory.objects.all()
 
     return render(
         request,
         template_name="all_pages_integration/contact_page.html",
-        #  context={
-        #     "contents": contents,
-        # }
+         context={
+            "categorise": categorise,
+        }
     )
 
 #コンテンツのページ

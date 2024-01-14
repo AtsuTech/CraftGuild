@@ -24,6 +24,12 @@
     <!-- 申し込みフォーム -->
     <div class="theme-bg-gray">
 
+        <div class="container">
+            {% include "components/menu_title_component.html" with menu_title="お問い合せ" %}
+
+            {% include "contact_form/contact_form.html" with categorise=categorise %}
+
+        </div>
 
     </div>
 

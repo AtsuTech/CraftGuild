@@ -14,7 +14,8 @@ urlpatterns = [
     path("documents/", include(wagtaildocs_urls)),
     path("search/", search_views.search, name="search"),
     path('', include('accounts.urls')),    # appアプリケーションのurls.pyを読み込むように追加
-    path('', include('all_pages_integration.urls')),
+    path('', include('all_pages_integration.urls')),#追加
+    path('', include('contact_form.urls')),#追加
     path('', include('trial_class_reservation.urls')),#追加
 ]
 

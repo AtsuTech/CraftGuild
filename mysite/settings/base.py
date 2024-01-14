@@ -32,6 +32,7 @@ WAGTAIL_USER_CUSTOM_FIELDS = ['user_id','user_type']
 INSTALLED_APPS = [
     "accounts",#ログイン・ログアウト
     "all_pages_integration",#このアプリがが中心的なアプリで、各ページのviewやurlを管理
+    "contact_form",#お問合せフォーム処理などのアプリ
     "contents",#コンテンツのモデル、テンプレート
     "creation_flow",#【教室】：作成の流れモデル
     "form",
