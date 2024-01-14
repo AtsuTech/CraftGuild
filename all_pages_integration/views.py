@@ -5,12 +5,12 @@ from django.shortcuts import render
 
 
 from contents.models import ContentsDetailPage #コンテンツのモデルをインポート
-from learn.models import LeanItem #身につくことのモデルをインポート
+
+
+from learn.models import LearnItem #身につくことのモデルをインポート
 from mentor.models import MentorDetailPage #身につくことのモデルをインポート
-
 from creation_flow.models import CreationFlowBlock #作成の流れのブロック
-from creation_flow.models import CreationFlowItem #作成の流れのアイテム
-
+from particular.models import ParticularBlock #こだわりのブロック
 
 from trial_class_reservation.forms import PostReservationForm
 from trial_class_reservation.models import TimeSlot #時間割モデル
@@ -32,9 +32,11 @@ from calendar import monthcalendar,setfirstweekday
 def feature_page(request):
 
     contents = ContentsDetailPage.objects.live().all()
-    learns = LeanItem.objects.live().all()
+    learns = LearnItem.objects.live().all()
     creation_flow_blocks = CreationFlowBlock.objects.live().all()
-    creation_flow_item = CreationFlowItem.objects.live().all()
+    #creation_flow_item = CreationFlowItem.objects.live().all()
+    particular_blocks = ParticularBlock.objects.live().all()
+
      
 
     return render(
@@ -44,7 +46,8 @@ def feature_page(request):
             "contents": contents,
             "learns":learns,
             "creation_flow_blocks":creation_flow_blocks,
-            "creation_flow_item":creation_flow_item,
+            #"creation_flow_item":creation_flow_item,
+            "particular_blocks":particular_blocks,
         }
     )
 

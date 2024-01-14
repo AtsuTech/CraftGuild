@@ -30,17 +30,18 @@ WAGTAIL_USER_CUSTOM_FIELDS = ['user_id','user_type']
 # Application definition
 
 INSTALLED_APPS = [
-    "accounts",
-    "all_pages_integration",
-    "contents",
-    "creation_flow",
+    "accounts",#ログイン・ログアウト
+    "all_pages_integration",#このアプリがが中心的なアプリで、各ページのviewやurlを管理
+    "contents",#コンテンツのモデル、テンプレート
+    "creation_flow",#【教室】：作成の流れモデル
     "form",
-    "mentor",
+    "mentor",#【特徴】：メンターのモデル
     "home",
-    "learn",
-    "users",
+    "learn",#【特徴】：身につくことのモデル
+    "particular",#【特徴】：こだわりのモデル
+    "users",#ユーザーモデルをカスタマイズ
     "search",
-    "trial_class_reservation",
+    "trial_class_reservation",#体験授業予約のフォーム処理などのアプリ
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.modeladmin",#Djangonのプレーンなモデルを使用するために追加(app:trial_class_reservationで使用)

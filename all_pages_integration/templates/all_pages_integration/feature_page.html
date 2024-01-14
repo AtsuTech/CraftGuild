@@ -29,9 +29,11 @@
 
         {% include "components/menu_title_component.html" with menu_title="身につくこと" %}
 
-        {% for learn in learns %}
-            {% include "components/card_vertical_img_top.html" with img_src=learn.cover_image card_title=learn.item card_body=learn.description %}
-        {% endfor %}
+        <div class="row d-flex align-items-center justify-content-center">
+            {% for learn in learns %}
+                {% include "components/card_vertical_img_top.html" with img_src=learn.cover_image card_title=learn.item card_body=learn.description %}
+            {% endfor %}            
+        </div>
 
     </div>
 </div>
@@ -61,106 +63,32 @@
                     </div>
                 </div>
             </div>
+
+            <!-- ドッドの矢印 -->
             {% if not creation_flow_block.order_check %}
-            <div class="container">
-                <div class="d-flex align-items-center justify-content-center">
-                    <span class="dli-arrow-down"></span>
-                </div>
-            </div>
+                {% include "components/vertical_dod_arrow.html" %}
             {% endif %}
+
         {% endfor %}
     </div>
 
 </div>
 
+
+<!-- こだわり -->
 <div class="theme-bg-gray pb-4">
     <div class="container">
 
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-            <div class="text-center">
-                <span>
-                    <small class="small">CraftGuildでモノづくり</small>
-                </span>
-                <br>
-                <span class="h1">
-                    こだわり
-                </span>
-            </div>
-        </div>
+        {% include "components/menu_title_component.html" with menu_title="こだわり" %}
 
+        {% for particular_block in particular_blocks %}
+            {% include "components/block_horizon_img_left.html" with title=particular_block.particular_title img=particular_block.cover_image description=particular_block.description %}
 
-        <div>
-            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
-                <div>
-                    <div class="h3 text-center mt-5">最適な学びがある環境</div>
-                    <div class="col-md-4 m-5" style="width: 18rem;">
-                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
-                                ミニミッション
-                            </h5>
-                            <p class="card-text pt-3">
-                                モノづくりに必要なスキルを
-                                ミニミッションで身につけていこう
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-center">
-                <span class="dod-line"></span>
-            </div>
-        </div>
-
-        <div>
-            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
-                <div>
-                    <div class="h3 text-center mt-5">最適な学びがある環境</div>
-                    <div class="col-md-4 m-5" style="width: 18rem;">
-                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
-                                ミニミッション
-                            </h5>
-                            <p class="card-text pt-3">
-                                モノづくりに必要なスキルを
-                                ミニミッションで身につけていこう
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-center">
-                <span class="dod-line"></span>
-            </div>
-        </div>
-
-        <div>
-            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
-                <div>
-                    <div class="h3 text-center mt-5">最適な学びがある環境</div>
-                    <div class="col-md-4 m-5" style="width: 18rem;">
-                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title text-center border-bottom border-3 border-dark p-2">
-                                ミニミッション
-                            </h5>
-                            <p class="card-text pt-3">
-                                モノづくりに必要なスキルを
-                                ミニミッションで身につけていこう
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+            <!-- ドッドの線 -->
+            {% if not particular_block.order_check %}
+                {% include "components/vertical_dod_line.html" %}
+            {% endif %}
+        {% endfor %}
 
     </div>
 </div>

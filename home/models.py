@@ -10,7 +10,8 @@ class HomePage(Page):
         "form.FormPage",
         "contents.ContentsSelectingPage",
         "creation_flow.CreationFlow",
-        "learn.LaenItemList",
+        "learn.LearnItemList",
+        "particular.Particular"
     ]
 
     def get_admin_display_title(self):
