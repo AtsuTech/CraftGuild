@@ -11,7 +11,8 @@ class HomePage(Page):
         "contents.ContentsSelectingPage",
         "creation_flow.CreationFlow",
         "learn.LearnItemList",
-        "particular.Particular"
+        "particular.Particular",
+        "price_plan.PricePlan",
     ]
 
     def get_admin_display_title(self):

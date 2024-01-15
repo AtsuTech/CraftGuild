@@ -12,11 +12,9 @@ from wagtail.admin.panels import FieldPanel
 #メンターの一覧のページ
 class MentorIntroductionPage(Page):
 
-    #homeのHomePageが親ページになる
-    #parent_page_types = ["home.HomePage"]
-
-    template = "introduction/online_school_page.html"
-
+    subpage_types = [
+        "mentor.MentorDetailPage"
+    ]
 
     #ページのタイトル
     page_title = models.CharField(

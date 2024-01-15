@@ -13,11 +13,12 @@ from creation_flow.models import CreationFlowBlock #作成の流れのブロッ�
 from particular.models import ParticularBlock #こだわりのブロック
 
 from trial_class_reservation.forms import PostReservationForm
+from price_plan.models import PricePlanBlock
 from trial_class_reservation.models import TimeSlot #時間割モデル
 from trial_class_reservation.models import Schedule #スケジュールモデル
 from trial_class_reservation.models import Content #予約フォームモデルmoderu
 
-from contact_form.models import ContactCategory
+from contact_form.models import ContactCategory#お問い合わせのカテゴリのモデル
 
 from datetime import datetime ,timedelta#年月日の処理に使用
 import calendar #月の日数取得
@@ -58,6 +59,8 @@ def feature_page(request):
 #教室のページ
 def online_school_page(request):
 
+    plans = PricePlanBlock.objects.live().all()
+
     mentors = MentorDetailPage.objects.live().all()
 
     year = 2024
@@ -89,6 +92,7 @@ def online_school_page(request):
         request,
         template_name="all_pages_integration/online_school_page.html",
          context={
+            "plans":plans,
             "mentors": mentors,
             "calendar_data":calendar_data,
         }

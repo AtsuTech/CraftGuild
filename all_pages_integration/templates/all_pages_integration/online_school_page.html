@@ -110,122 +110,37 @@
 </div>
 
 
-
+<!-- プラン -->
 <div class="theme-bg-gray pb-4">
-
     <div class="container">
+        {% include "components/menu_title_component.html" with menu_title="プラン" %}
 
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-            <div class="text-center">
-                <span>
-                    <small class="small">CraftGuildでのモノづくりの</small>
-                </span>
-                <br>
-                <span class="h1">
-                    プラン
-                </span>
-            </div>
-        </div>
-
-        <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
-
-            <div>
-
-                <div class="h3 text-center mt-5">80分授業</div>
-
-                <div class="row">
-                    <div class="col-md-4 m-5" style="width: 18rem;">
-                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="card-title text-center h5 border-bottom border-3 border-dark p-2">
-                                月2プラン
-                            </div>
-                            <div class="card-text pt-3 text-center">
-                                <div class="h4">15,200円(税込)</div>
-                                <p>5,100円(税込) (160分)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 m-5" style="width: 18rem;">
-                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="card-title text-center h5 border-bottom border-3 border-dark p-2">
-                                月2プラン
-                            </div>
-                            <div class="card-text pt-3 text-center">
-                                <div class="h4">15,200円(税込)</div>
-                                <p>5,100円(税込) (160分)</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4 m-5" style="width: 18rem;">
-                        <img src="https://www.dohouse.co.jp/marketing-info/files/2019/02/890788_s.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <div class="card-title text-center h5 border-bottom border-3 border-dark p-2">
-                                月2プラン
-                            </div>
-                            <div class="card-text pt-3 text-center">
-                                <div class="h4">15,200円(税込)</div>
-                                <p>5,100円(税込) (160分)</p>
-                            </div>
-                        </div>
-                    </div>
+        {% for plan in plans %}
+            <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
+                <div>
+                    <div class="h3 text-center mt-5">{{plan.plan_title}}</div>
+                    {% for price in plan.get_children.specific %}
+                        {% include "components/card_vertical_img_top_2.html" with img=price.cover_image title=price.plan_item main=price.price1 sub=price.price2 %}
+                    {% endfor %}
                 </div>
-
-
             </div>
-
-        </div>
+        {% endfor %}
     </div>
-
-
-
 </div>
 
-
+<!-- カレンダー -->
 <div class="theme-bg-orange">
-
     <div class="container pb-3">
-        <div class="">
-
-            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <div class="text-center">
-                    <span>
-                        <small class="small">CraftGuildでのモノづくりの</small>
-                    </span>
-                    <br>
-                    <span class="h1">
-                        カレンダー
-                    </span>
-                </div>
-            </div>
-            
-        </div>
-
+        {% include "components/menu_title_component.html" with menu_title="カレンダー" %}
         {% include 'components/calendar.html' %}
-        
     </div>
-
 </div>
 
 
 <div class="theme-bg-gray">
 
     <div class="container">
-
-        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-            <div class="text-center">
-                <span>
-                    <small class="small">CraftGuildでのモノづくりの</small>
-                </span>
-                <br>
-                <span class="h1">
-                    メンター紹介
-                </span>
-            </div>
-        </div>
+        {% include "components/menu_title_component.html" with menu_title="メンター紹介" %}
 
         <div class="row">
             {% load wagtailcore_tags wagtailimages_tags %}

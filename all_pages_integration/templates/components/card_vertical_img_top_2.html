@@ -1,0 +1,15 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="col-md-4 m-5" style="width: 18rem;">
+    {% image img fill-300x300 as cover_image %}
+    <img src="{{ cover_image.url }}" class="card-img-top img-style-cover" alt="{{ cover_image.url }}" height="200px">
+    <div class="card-body">
+        <div class="card-title text-center h5 border-bottom border-3 border-dark p-2">
+            {{title}}
+        </div>
+        <div class="card-text pt-3 text-center">
+            <div class="h4">{{main}}</div>
+            <p>{{sub}}</p>
+        </div>
+    </div>
+</div>

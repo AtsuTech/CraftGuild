@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "home",
     "learn",#【特徴】：身につくことのモデル
     "particular",#【特徴】：こだわりのモデル
+    "price_plan",#料金プランのモデル
     "users",#ユーザーモデルをカスタマイズ
     "search",
     "trial_class_reservation",#体験授業予約のフォーム処理などのアプリ
