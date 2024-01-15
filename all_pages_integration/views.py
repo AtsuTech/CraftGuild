@@ -18,6 +18,8 @@ from trial_class_reservation.models import TimeSlot #時間割モデル
 from trial_class_reservation.models import Schedule #スケジュールモデル
 from trial_class_reservation.models import Content #予約フォームモデルmoderu
 
+from trial_flow.models import TrialFlowBlock #体験の流れのモデルを取得
+
 from contact_form.models import ContactCategory#お問い合わせのカテゴリのモデル
 
 from datetime import datetime ,timedelta#年月日の処理に使用
@@ -152,6 +154,9 @@ def trial_class_page(request):
 
     contents = Content.objects.all()
 
+    #体験の流れのモデルを取得
+    flows = TrialFlowBlock.objects.all()
+
     return render(
         request,
         template_name="all_pages_integration/trial_class_page.html",
@@ -159,6 +164,7 @@ def trial_class_page(request):
             "timeslots": timeslots,
             "schedules": schedules,
             "contents": contents,
+            "flows":flows,
             "week_day_arry":week_day_array,
         }
     )

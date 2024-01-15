@@ -13,10 +13,21 @@
     {% include "components/page_header.html" with header="体験授業" %}
 
     <!-- 体験の流れ -->
-    <div class="theme-bg-orange">
+    <div class="theme-bg-orange pb-5">
 
         <div class="container">
             {% include "components/menu_title_component.html" with menu_title="体験の流れ" %}
+
+            {% for flow in flows %}
+
+                {% include "components/block_horizon_img_left_with_bage.html" with title=flow.flow_title sub=flow.sub_title color=flow.sub_title_color img=flow.cover_image body=flow.description %}
+                
+                <!-- ドッドの矢印 -->
+                {% if not flow.order_check %}
+                    {% include "components/vertical_dod_arrow.html" %}
+                {% endif %}
+
+            {% endfor %}
         </div>
 
     </div>

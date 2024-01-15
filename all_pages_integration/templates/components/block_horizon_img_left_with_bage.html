@@ -1,0 +1,33 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div style="position: relative;">
+    <div class="circle-title d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;background:{{color}}">
+        <div class="text-center">
+            <span>
+                <small class="small">{{sub|richtext}}</small>
+            </span>
+        </div>
+    </div>
+    <div class="rounded-box bg-white /d-flex /align-items-center justify-content-center">
+
+        <div>
+            <div class="h3 text-center mt-5 mb-5">{{title}}</div> 
+            
+            <div class="col-md-6 offset-md-3">
+                <div class="row mb-5">
+                    <div class="col-md-5">
+                        {% if img %}
+                            {% image img fill-300x300 as cover_image %}
+                            <img src="{{ cover_image.url }}" class="card-img-top img-style-cover" alt="{{ cover_image.url }}" width="500px" height="200px">
+                        {% endif %}
+                    </div>
+                    <div class="col-md-7">
+                        {{ body|richtext }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

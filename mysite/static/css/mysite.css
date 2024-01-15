@@ -31,6 +31,12 @@ main{
     font-size: x-small;
 }
 
+/* テキスト折り返しを強制する */
+.break-word {
+    overflow-wrap: break-word;
+	word-break: keep-all;
+}
+
 /* 背景色ーオレンジ */
 .theme-bg-orange{
     background:#FFE8A3;

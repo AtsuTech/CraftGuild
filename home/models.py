@@ -13,6 +13,7 @@ class HomePage(Page):
         "learn.LearnItemList",
         "particular.Particular",
         "price_plan.PricePlan",
+        "trial_flow.TrialFlow",
     ]
 
     def get_admin_display_title(self):

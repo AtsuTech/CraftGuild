@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "users",#ユーザーモデルをカスタマイズ
     "search",
     "trial_class_reservation",#体験授業予約のフォーム処理などのアプリ
+    "trial_flow",#体験の流れモデル
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.modeladmin",#Djangonのプレーンなモデルを使用するために追加(app:trial_class_reservationで使用)
