@@ -8,12 +8,13 @@ from contents.models import ContentsDetailPage #コンテンツのモデルを�
 
 
 from learn.models import LearnItem #身につくことのモデルをインポート
-from mentor.models import MentorDetailPage #身につくことのモデルをインポート
+from school_schedule.models import SchoolSchedule #教室のスケジュール(休校日)
+from mentor.models import MentorDetailPage #メンターのモデルをインポート
 from creation_flow.models import CreationFlowBlock #作成の流れのブロック
 from particular.models import ParticularBlock #こだわりのブロック
 
 from trial_class_reservation.forms import PostReservationForm
-from price_plan.models import PricePlanBlock
+from price_plan.models import PricePlanBlock #料金プラン
 from trial_class_reservation.models import TimeSlot #時間割モデル
 from trial_class_reservation.models import Schedule #スケジュールモデル
 from trial_class_reservation.models import Content #予約フォームモデルmoderu
@@ -74,8 +75,8 @@ def online_school_page(request):
 
     cal = monthcalendar(year, month)
 
-    # カレンダー内の各日に対応するイベントを取得
-    #events = EventCalendarItem.objects.filter(event_date__year=year, event_date__month=month)
+    # カレンダー内の各日に対応する休日を取得
+    day_offs = SchoolSchedule.objects.filter(day_off__year=year, day_off__month=month)
 
     # カレンダーのデータを作成
     calendar_data = []
@@ -83,12 +84,12 @@ def online_school_page(request):
         week_data = []
         for day in week:
             if day == 0:
-                week_data.append({'day': '', 'events': []})
+                week_data.append({'day': '', 'day_off': []})
             else:
                 date = datetime(year, month, day)
-                #day_events = events.filter(event_date=date)
-                #week_data.append({'day': day, 'events': day_events})
-                week_data.append({'day': day})
+                day_off = day_offs.filter(day_off=date)
+                week_data.append({'day': day, 'day_off': day_off})
+                #week_data.append({'day': day})
         calendar_data.append(week_data)
 
     return render(
@@ -119,13 +120,13 @@ def trial_class_page(request):
     weekday = current_date.weekday()
 
     #月曜スタートの1週間の開始の日にちを計算{(今日の日にち)ー(月曜起点の今日の曜日までの日数)}
-    start_day = day - weekday
+    #start_day = day - weekday
 
     #今月は全部で何日かを取得
-    day_total_now_month = calendar.monthrange(year, month)[1]
+    #day_total_now_month = calendar.monthrange(year, month)[1]
 
     #今日の日付から、今月最終日の間の日にち
-    today_to_lastday =  (day_total_now_month - day) + 1
+    #today_to_lastday =  (day_total_now_month - day) + 1
 
 
 

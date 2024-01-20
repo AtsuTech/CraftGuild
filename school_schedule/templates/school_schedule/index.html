@@ -1,0 +1,167 @@
+{% extends "wagtailadmin/base.html" %}
+{% block titletag %}{{ current_year }} calendar{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        .flex{
+            display: flex;
+        }
+
+        .w-max{
+            width: 100%;
+        }
+
+        .colum-item{
+            border-bottom: dotted;
+        }
+
+        .text-cente{
+            text-align: center;
+        }
+
+        .text-bold{
+            font-weight: bold;
+        }
+
+        .calendar-table{
+            width: 50%;
+            border: solid 1px #2E1F5E;
+        }
+
+        .calendar-table thead{
+            border: solid 1px #2E1F5E;
+        }
+
+        .calendar-table th{
+           height: 40px;
+           border-right: solid 1px #fff;
+           background: #2E1F5E;
+           color: #fff;
+        }
+
+        .calendar-table td{
+           height: 40px;
+           border: solid 1px #2E1F5E;
+           padding: 10px;
+        }
+
+        .add-day-off-btn{
+            width: 50%;
+            padding: 5px;
+            margin-top: 5px;
+            background: #1E7D7E;
+            color: #fff;
+            border-radius: 6px;
+        }
+
+        .delete-btn{
+            width: 70px;
+            border: solid 1px #CD4445;
+            border-radius: 4px;
+            background: none;
+            color: #CD4445;
+        }
+
+        table.month {
+            margin: 20px;
+        }
+        table.month td, table.month th {
+            padding: 5px;
+        }
+
+        /* PC */
+        @media only screen and (min-width: 800px) {
+            main{
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        }
+
+        /* mobile */
+        @media only screen and (max-width: 768px) {
+            main{
+                width: 100%;
+            }
+
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title="休講日の登録" icon="date" %}
+
+    <main>
+    <h1>休講日の登録</h1>
+
+
+   
+    <div class="text-cente">{{year}}年{{month}}月</div>
+
+    {% if month > 1 %}
+        <a href="/admin/calendar/?year={{year}}&month={{month|add:-1}}">←先月</a>
+    {% else %}
+        <a href="/admin/calendar/?year={{year|add:-1}}&month=12">←先月</a>
+    {% endif %}
+    
+    {% if month < 12 %}
+        <a href="/admin/calendar/?year={{year}}&month={{month|add:1}}">翌月→</a>
+    {% else %}
+        <a href="/admin/calendar/?year={{year|add:1}}&month=1">翌月→</a>
+    {% endif %}
+
+
+    <form action="{% url 'school_schedule:add_schedule' %}" method="post" class="theme-bg-orange p-3">    
+        {% csrf_token %}
+    <table border="1" class="calendar-table">
+        <thead>
+            <tr>
+                <th scope="col" style="width: 14.29%;">月</th>
+                <th scope="col" style="width: 14.29%;">火</th>
+                <th scope="col" style="width: 14.29%;">水</th>
+                <th scope="col" style="width: 14.29%;">木</th>
+                <th scope="col" style="width: 14.29%;">金</th>
+                <th scope="col" style="width: 14.29%;">土</th>
+                <th scope="col" style="width: 14.29%;border-right: solid 1px #2E1F5E;">日</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% load wagtailcore_tags wagtailimages_tags %}
+            {% for week in calendar_data %}
+                <tr>
+                    {% for day_data in week %}
+                        {% if not day_data.day == "" %}
+                        <td style="height: 14.29%;">
+                            <div>{{ day_data.day }}</div>
+                            {% if day_data.check %}
+                                <span>休</span>
+                            {% else %}
+                                <input type="checkbox" name="day_off" value="2024-01-{{day_data.day|stringformat:'02d'}}">
+                            {% endif %}
+                        </td>
+                        {% else %}
+                        <td>-</td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <button type="submit" class="add-day-off-btn">登録</button>
+    </form>
+
+    <h1>登録されている休講日の一覧</h1>
+
+    {% for i in day_offs %}
+        <div class="flex w-max colum-item">
+            <h3 class="w-max">{{ i.day_off }}</h3>
+            <div style="padding-top: 12px;">
+                <button onclick=location.href="{% url 'school_schedule:delete_schedule' i.id %}" class="delete-btn">削除</button>
+            </div>
+        </div>
+    {% endfor %}
+
+    </main>
+{% endblock %}

@@ -17,6 +17,7 @@ urlpatterns = [
     path('', include('all_pages_integration.urls')),#追加
     path('', include('contact_form.urls')),#追加
     path('', include('trial_class_reservation.urls')),#追加
+    path('', include('school_schedule.urls')),#追加
 ]
 
 

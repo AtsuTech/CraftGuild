@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "price_plan",#料金プランのモデル
     "question",#Q＆Aのモデル　
     "users",#ユーザーモデルをカスタマイズ
+    "school_schedule",#管理画面で休校のスケジュール
     "search",
     "trial_class_reservation",#体験授業予約のフォーム処理などのアプリ
     "trial_flow",#体験の流れモデル
