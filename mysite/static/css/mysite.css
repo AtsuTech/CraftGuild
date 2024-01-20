@@ -160,20 +160,3 @@ main{
     object-fit: cover;
 }
 
-
-
-/* レスポンシブ設定 */
-@media screen and (max-width: 300px) {
-	/* 760px以下に適用されるCSS（PC用） */
-    .mb-dsip{
-        display: block;
-    }
-}
-
-@media screen and (max-width: 760px) {
-	/* 760px以下に適用されるCSS（PC用） */
-    /* 760px以上の時だけ表示する */
-    .pc-dsip{
-        display: none;
-    }
-}

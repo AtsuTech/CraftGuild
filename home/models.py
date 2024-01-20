@@ -14,6 +14,7 @@ class HomePage(Page):
         "particular.Particular",
         "price_plan.PricePlan",
         "trial_flow.TrialFlow",
+        "question.Question",
     ]
 
     def get_admin_display_title(self):

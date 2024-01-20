@@ -20,6 +20,7 @@ from trial_class_reservation.models import Content #予約フォームモデルm
 
 from trial_flow.models import TrialFlowBlock #体験の流れのモデルを取得
 
+from question.models import QuestionItem #Q&Aのモデル
 from contact_form.models import ContactCategory#お問い合わせのカテゴリのモデル
 
 from datetime import datetime ,timedelta#年月日の処理に使用
@@ -173,12 +174,14 @@ def trial_class_page(request):
 def contact_page(request):
 
     # contents = ContentsDetailPage.objects.live().all()
+    questions = QuestionItem.objects.live().all()
     categorise = ContactCategory.objects.all()
 
     return render(
         request,
         template_name="all_pages_integration/contact_page.html",
          context={
+            "questions":questions,
             "categorise": categorise,
         }
     )

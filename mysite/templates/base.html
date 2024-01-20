@@ -34,6 +34,8 @@
         {# Original stylesheets (bootstrapより後に読み込みことでこのスタイルが上書きされる) #}
         <link rel="stylesheet" type="text/css" href="{% static 'css/mysite.css' %}">
 
+        <link rel="stylesheet" type="text/css" href="{% static 'css/responsive_header.css' %}">
+
         <link rel="stylesheet" type="text/css" href="{% static 'css/form_page.css' %}">
 
         <!-- シンタックスハイライトの見た目カスタマイズ -->
@@ -72,11 +74,8 @@
     <body class="">
         {% wagtailuserbar %}
 
-        <header>
-            <div class="container">
-                {% include 'header.html' %}
-            </div>
-        </header>
+
+        {% include 'header.html' %}
 
 
 
@@ -92,6 +91,7 @@
         <script type="text/javascript" src="{% static 'js/contact_confirm.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/mysite.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/text_toc.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/responsive_header.js' %}"></script>
 
         {% block extra_js %}
         {# Override this in templates to add extra javascript #}

@@ -13,10 +13,25 @@
     {% include "components/page_header.html" with header="お問合せ" %}
 
     <!-- 体験の流れ -->
-    <div class="theme-bg-orange">
+    <div class="theme-bg-orange pb-5">
 
         <div class="container">
             {% include "components/menu_title_component.html" with menu_title="よくある質問" %}
+
+            {% for question in questions%}
+            
+                 <div style="position: relative;">
+                    <span class="square-badge" style="position: absolute;z-index:10;" >
+                        Q
+                    </span>
+                    <div  class="alert bg-white border border-secondary w-100" role="alert" style="position: absolute; top:20px; left:20px;">
+                        {{ question.inquiry|richtext }}
+                        <!-- <p>{{ question.answer|richtext }}</p> -->
+                    </div>
+                </div>    
+                <p style="margin:100px;padding-left:20px;">{{ question.answer|richtext }}</p>           
+
+            {% endfor %}
         </div>
 
     </div>
