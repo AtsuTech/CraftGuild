@@ -14,94 +14,35 @@
 
             {% include "components/menu_title_component.html" with menu_title="時間割り" %}
             
-            <!-- <div class="table-responsive"></div> -->
+            <!-- 時間割 -->
             <table class="table table-bordered border-3">
-                <thead>
-                    <tr class="text-center">
-                        <th scope="col" style="width: 12.5%;">
-                            <span>-</span>
-                        </th>
-                        <th scope="col" style="width: 12.5%;">月</th>
-                        <th scope="col" style="width: 12.5%;">火</th>
-                        <th scope="col" style="width: 12.5%;">水</th>
-                        <th scope="col" style="width: 12.5%;">木</th>
-                        <th scope="col" style="width: 12.5%;">金</th>
-                        <th scope="col" style="width: 12.5%;">土</th>
-                        <th scope="col" style="width: 12.5%;">日</th>
-                    </tr>
+                <thead class="text-center">
+                    <th scope="col" style="width: 12.5%;">
+                        <span>-</span>
+                    </th>
+                    <th scope="col" style="width: 12.5%;">月</th>
+                    <th scope="col" style="width: 12.5%;">火</th>
+                    <th scope="col" style="width: 12.5%;">水</th>
+                    <th scope="col" style="width: 12.5%;">木</th>
+                    <th scope="col" style="width: 12.5%;">金</th>
+                    <th scope="col" style="width: 12.5%;">土</th>
+                    <th scope="col" style="width: 12.5%;">日</th>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td class="align-middle text-center">
-                        <span>10:00〜</span><br>
-                        <span>11:20</span>
-                    </th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                  </tr>
-
-                  <tr>
-                    <td class="align-middle text-center">
-                        <span>11:40〜</span><br>
-                        <span>13:00</span>
-                    </th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                  </tr>
-
-                  <tr>
-                    <td class="align-middle text-center">
-                        <span>14:20〜</span><br>
-                        <span>15:40</span>
-                    </th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                  </tr>
-
-                  <tr>
-                    <td class="align-middle text-center">
-                        <span>16:00〜</span><br>
-                        <span>17:20</span>
-                    </th>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td></td>
-                    <td></td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                  </tr>
-
-                  <tr>
-                    <td class="align-middle text-center">
-                        <span>17:40〜</span><br>
-                        <span>19:00</span>
-                    </th>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td></td>
-                    <td></td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                    <td class="align-middle text-center h4">◯</td>
-                  </tr>
-
-                </tbody>
+                {% for week_data in week_array %}
+                    <tr>
+                        <td>{{ week_data.time.start_time }} - {{ week_data.time.end_time }}</td>
+                        {% for day_data in week_data.days %}
+                            {% if day_data.available %}
+                                <td style="font-size: 40px;" class="align-middle text-center">
+                                    ◯
+                                </td>
+                            {% else %}
+                                <td>
+                                </td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
             </table>
             </div>
         </div>

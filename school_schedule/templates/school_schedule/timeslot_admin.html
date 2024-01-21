@@ -1,0 +1,184 @@
+
+{% extends "wagtailadmin/base.html" %}
+{% block titletag %}{{ current_year }} calendar{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        .flex{
+            display: flex;
+        }
+
+        .w-max{
+            width: 100%;
+        }
+
+        .colum-item{
+            border-bottom: dotted;
+        }
+
+        .text-cente{
+            text-align: center;
+        }
+
+        .text-bold{
+            font-weight: bold;
+        }
+
+        .timeslot-table{
+            width: 100%;
+            border: solid 1px #2E1F5E;
+        }
+
+        .timeslot-table thead{
+            border: solid 1px #2E1F5E;
+        }
+
+        .timeslot-table th{
+           height: 40px;
+           border-right: solid 1px #fff;
+           background: #2E1F5E;
+           color: #fff;
+        }
+
+        .timeslot-table td{
+           height: 40px;
+           border: solid 1px #2E1F5E;
+           padding: 10px;
+        }
+
+        .add-btn{
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            background: #1E7D7E;
+            color: #fff;
+            border-radius: 6px;
+        }
+
+        .edit-btn{
+            width: 70px;
+            border: solid 1px #1E7D7E;
+            border-radius: 4px;
+            background: none;
+            color: #1E7D7E;
+        }
+
+        .delete-btn{
+            width: 70px;
+            border: solid 1px #CD4445;
+            border-radius: 4px;
+            background: none;
+            color: #CD4445;
+        }
+
+        table.month {
+            margin: 20px;
+        }
+        table.month td, table.month th {
+            padding: 5px;
+        }
+
+        /* PC */
+        @media only screen and (min-width: 800px) {
+            main{
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        }
+
+        /* mobile */
+        @media only screen and (max-width: 768px) {
+            main{
+                width: 100%;
+            }
+
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title="時間割" icon="date" %}
+
+
+    <main>
+        <h1>時間割</h1>
+        <form action="{% url 'school_schedule:add_timeslot' %}" method="post">
+            {% csrf_token %}
+            <div class="flex">
+                <div>
+                    <label for="">開始時刻</label>
+                    <input type="time" name="start_time" value="">
+                </div>
+                <div>
+                    <label for="">終了時刻</label>
+                    <input type="time" name="end_time" value="">
+                </div>
+            </div>
+            <div style="width: 200px;">
+                <button class="add-btn">追加</button>
+            </div>
+        </form>
+
+        <h1>登録中の時間割</h1>
+
+        {% for time in times %}
+            <div class="flex colum-item w-max">
+                <h3 class="w-max">{{time.start_time}} - {{time.end_time}}</h3>
+                <div style="padding: 12px;">
+                    <button onclick=location.href="/admin/timeslot/edit/view/?id={{time.id}}" class="edit-btn">編集</button>
+                </div>
+                <div style="padding: 12px;">
+                    <button onclick=location.href="{% url 'school_schedule:delete_timeslot' time.id %}" class="delete-btn">削除</button>
+                </div>
+            </div>
+        {% endfor %}
+
+        <h1>開校スケジュールの設定</h1>
+
+        <table class="timeslot-table">
+            <thead>
+                <th>時間割</th>
+                <th scope="col" style="width: 14.29%;">月</th>
+                <th scope="col" style="width: 14.29%;">火</th>
+                <th scope="col" style="width: 14.29%;">水</th>
+                <th scope="col" style="width: 14.29%;">木</th>
+                <th scope="col" style="width: 14.29%;">金</th>
+                <th scope="col" style="width: 14.29%;">土</th>
+                <th scope="col" style="width: 14.29%;">日</th>
+            </thead>
+            {% for week_data in week_array %}
+                <tr>
+                    <td>{{ week_data.time.start_time }} - {{ week_data.time.end_time }}</td>
+                    {% for day_data in week_data.days %}
+                        {% if day_data.available %}
+                        <td style="text-align: center;">
+                            <div>
+                                <span style="font-size: 30px;">
+                                ◯ 
+                                </span>                                
+                            </div>
+                            {% for i in day_data.available %}
+                                <button onclick=location.href="{% url 'school_schedule:delete_available' i.id %}" class="delete-btn">削除</button>
+                            {% endfor %}
+                        </td>
+                        {% else %}
+                            <td>
+                                <form action="{% url 'school_schedule:add_available' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="start_time" value="{{ week_data.time.start_time }}">
+                                    <input type="hidden" name="end_time" value="{{ week_data.time.end_time }}">
+                                    <input type="hidden" name="day" value="{{ day_data.day }}">
+                                    <button class="add-btn">開校に<br/>設定</button>
+                                </form>
+                            </td>
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </table>
+
+    </main>
+{% endblock %}

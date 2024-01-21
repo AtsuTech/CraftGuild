@@ -1,0 +1,110 @@
+
+{% extends "wagtailadmin/base.html" %}
+{% block titletag %}{{ current_year }} calendar{% endblock %}
+
+{% block extra_css %}
+    {{ block.super }}
+    <style>
+        .flex{
+            display: flex;
+        }
+
+        .w-max{
+            width: 100%;
+        }
+
+        .colum-item{
+            border-bottom: dotted;
+        }
+
+        .text-cente{
+            text-align: center;
+        }
+
+        .text-bold{
+            font-weight: bold;
+        }
+
+        .timeslot-table{
+            width: 100%;
+            border: solid 1px #2E1F5E;
+        }
+
+        .timeslot-table thead{
+            border: solid 1px #2E1F5E;
+        }
+
+        .timeslot-table th{
+           height: 40px;
+           border-right: solid 1px #fff;
+           background: #2E1F5E;
+           color: #fff;
+        }
+
+        .timeslot-table td{
+           height: 40px;
+           border: solid 1px #2E1F5E;
+           padding: 10px;
+        }
+
+        .add-btn{
+            width: 100%;
+            padding: 5px;
+            margin-top: 5px;
+            background: #1E7D7E;
+            color: #fff;
+            border-radius: 6px;
+        }
+
+        .delete-btn{
+            width: 70px;
+            border: solid 1px #CD4445;
+            border-radius: 4px;
+            background: none;
+            color: #CD4445;
+        }
+
+        table.month {
+            margin: 20px;
+        }
+        table.month td, table.month th {
+            padding: 5px;
+        }
+
+        /* PC */
+        @media only screen and (min-width: 800px) {
+            main{
+                width: 80%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+        }
+
+        /* mobile */
+        @media only screen and (max-width: 768px) {
+            main{
+                width: 100%;
+            }
+
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+    {% include "wagtailadmin/shared/header.html" with title="時間割" icon="date" %}
+
+
+    <main>
+        <h1>時間割の編集</h1>
+
+        <form action="{% url 'school_schedule:edit_timeslot' edit_timeslot.id %}" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{edit_timeslot.id}}">
+            <input type="time" name="start_time" value="{{edit_timeslot.start_time}}">
+            <input type="time" name="end_time" value="{{edit_timeslot.end_time}}">
+            <button type="submit">更新</button>
+        </form>
+
+    </main>
+{% endblock %}

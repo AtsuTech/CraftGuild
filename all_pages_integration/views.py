@@ -9,6 +9,8 @@ from contents.models import ContentsDetailPage #コンテンツのモデルを�
 
 from learn.models import LearnItem #身につくことのモデルをインポート
 from school_schedule.models import SchoolSchedule #教室のスケジュール(休校日)
+from school_schedule.models import SchoolTimeSlot #時間割の時間の部分
+from school_schedule.models import AvailableTime #時間割の◯の部分
 from mentor.models import MentorDetailPage #メンターのモデルをインポート
 from creation_flow.models import CreationFlowBlock #作成の流れのブロック
 from particular.models import ParticularBlock #こだわりのブロック
@@ -67,6 +69,18 @@ def online_school_page(request):
 
     mentors = MentorDetailPage.objects.live().all()
 
+    #時間割表示用の配列を作成
+    times = SchoolTimeSlot.objects.all()
+    day_code = [0,1,2,3,4,5,6]
+    
+    week_array = []
+    for time in times:
+        day_data = []
+        for d in day_code:
+            available = AvailableTime.objects.filter(day=d, time=time)
+            day_data.append({'day': d, 'available': available})
+        week_array.append({'time': time, 'days': day_data})
+
     year = 2024
     month = 1
 
@@ -97,6 +111,7 @@ def online_school_page(request):
         template_name="all_pages_integration/online_school_page.html",
          context={
             "plans":plans,
+            "week_array": week_array,
             "mentors": mentors,
             "calendar_data":calendar_data,
         }
