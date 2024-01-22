@@ -1,43 +1,84 @@
 <!-- 画像処理 -->
 {% load wagtailcore_tags wagtailimages_tags %}
 
-<!-- <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post"> -->
+
+{% block extra_css %}
+    <style>
+
+        input[type="radio"] {
+            display: none;
+        }
+
+        /* カスタムスタイルのラベル */
+        label.contents-label {
+            display: block;
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
+            padding-top: 40px;
+            padding-left: 10px;
+            padding-right: 10px;
+            text-align: center;
+            line-height: 20px;
+            background: #fff;
+            margin:10px;
+            border-radius: 5px;
+            margin-right: 20px;
+        }
+
+        /* チェックされたラベルのスタイル */
+        input[type="radio"]:checked + label.contents-label {
+            background-color: #FFC7C2; /* 選択時の背景色 */
+        }
+    </style>
+{% endblock %}
+
 <form action="#" id="reservation">
-    
-    {% csrf_token %}
 
     <div class="row /mt-4">
         <div class="col-md-6">
-            <label for="">お子様の氏名(漢字)</label>
+            <label for="">
+                お子様の氏名(漢字) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             <input type="text" name="child_name1" class="orginal-input-style">
         </div>
         <div class="col-md-6">
-            <label for="">お子様の氏名(ふりがな)</label>
+            <label for="">
+                お子様の氏名(ふりがな) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             <input type="text" name="child_name2" class="orginal-input-style">
         </div>
     </div>
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <label for="">保護者の氏名(漢字)</label>
+            <label for="">
+                保護者の氏名(漢字) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             <input type="text" name="parent_name1" class="orginal-input-style">
         </div>
         <div class="col-md-6">
-            <label for="">保護者の氏名(ふりがな)</label>
+            <label for="">
+                保護者の氏名(ふりがな) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             <input type="text" name="parent_name2" class="orginal-input-style">
         </div>
     </div>
 
     <div  class="row mt-4">
         <div  class="col-md-12">
-            <label for="">メールアドレス</label>
+            <label for="">
+                メールアドレス <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             <input type="email" name="email" class="orginal-input-style">
         </div>
     </div>
 
     <div  class="row mt-4">
         <div  class="col-md-12">
-            <label for="">電話番号</label>
+            <label for="">
+                電話番号 <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             <input type="text" name="phone_number" class="orginal-input-style">
         </div>
     </div>
@@ -45,7 +86,9 @@
 
     <div  class="row mt-4">
         <div  class="col-md-12">
-            <label for="">希望日時</label>
+            <label for="">
+                希望日時 <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             {% include 'trial_class_reservation/reservation_calendar.html' %}
         </div>
     </div>
@@ -53,20 +96,26 @@
 
     <div  class="row mt-4">
         <div  class="col-md-12">
-            <label for="">コンテンツ</label>
-            {% for content in contents %}
-            <div>
-
-                <label for="">
-                    {% if content.image %}
-                    <img src="{{ content.image.url }}" alt="イメージ画像" width="100px">
-                    {% endif %}
-                    <div>{{content.id}}{{ content.name }}</div>
-                </label>
-                
-                <input type="radio" name="content" value="{{content.id}}" data-content="{{content.id}}{{content.name}}"><br>
+            <div class="mb-2">
+                コンテンツ <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
             </div>
+
+            <div class="w-100 d-flex">
+            {% for content in contents %}
+            
+                <div>
+                    <input type="radio" id="content{{ content.id }}" name="content" value="{{content.id}}" data-content="{{content.id}}{{content.name}}" style="display: none;">
+                    <label for="content{{ content.id }}" class="contents-label">
+                        {% if content.image %}
+                        <img src="{{ content.image.url }}" alt="イメージ画像" width="100%" height="80px" style="object-fit: cover;">
+                        {% endif %}
+                        <div class="text-center" contenteditable="false">{{ content.name }}</div>
+                    </label>
+                </div>
+            
             {% endfor %}
+            </div>
+
         </div>
     </div>
 
