@@ -50,7 +50,8 @@ def post_cotact_form(request):
         form = PostContactForm()
 
     #ここは、エラーの時の処理
-    return redirect('/feature')
+    request.session['post_error2'] = True
+    return redirect('/contact')
     
 
 

@@ -1,49 +1,75 @@
+{% block extra_css %}
+    <style>
+        .select-outer::after{
+            content: "▼";
+            width: 20px;
+            position: absolute;
+            top:35px;
+            right:20px;
+            color: grey;
+        }
+    </style>
+{% endblock %}
 
 <form action="#" id="contact">
     {% csrf_token %}
     <div class="row /mt-4">
         <div class="col-md-6">
-            <label for="">お子様の氏名(漢字)</label>
-            <input type="text" name="child_name1" class="orginal-input-style">
+            <label for="">
+                お子様の氏名(漢字) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
+            <input type="text" name="child_name1" class="orginal-input-style" placeholder="田中一郎" required>
         </div>
         <div class="col-md-6">
-            <label for="">お子様の氏名(ふりがな)</label>
-            <input type="text" name="child_name2" class="orginal-input-style">
+            <label for="">
+                お子様の氏名(ふりがな) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
+            <input type="text" name="child_name2" class="orginal-input-style" placeholder="たなかいちろう" required>
         </div>
     </div>
 
     <div class="row mt-4">
         <div class="col-md-6">
-            <label for="">保護者の氏名(漢字)</label>
-            <input type="text" name="parent_name1" class="orginal-input-style">
+            <label for="">
+                保護者の氏名(漢字) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
+            <input type="text" name="parent_name1" class="orginal-input-style" placeholder="田中真一" required>
         </div>
         <div class="col-md-6">
-            <label for="">保護者の氏名(ふりがな)</label>
-            <input type="text" name="parent_name2" class="orginal-input-style">
+            <label for="">
+                保護者の氏名(ふりがな) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
+            <input type="text" name="parent_name2" class="orginal-input-style" placeholder="たなかしんいち" required>
         </div>
     </div>
 
     <div  class="row mt-4">
         <div  class="col-md-12">
-            <label for="">メールアドレス</label>
-            <input type="email" name="email" class="orginal-input-style">
+            <label for="">
+                メールアドレス <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
+            <input type="email" name="email" class="orginal-input-style" required>
         </div>
     </div>
 
     <div  class="row mt-4">
         <div  class="col-md-12">
-            <label for="">電話番号</label>
-            <input type="text" name="phone_number" class="orginal-input-style">
+            <label for="">
+                電話番号 <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
+            <input type="text" name="phone_number" class="orginal-input-style" required>
         </div>
     </div>
 
-    <div  class="row mt-4">
-        <div  class="col-md-12">
-            <label for="">選択</label>
+    <div  class="row mt-4" style="position: relative;">
+        <div  class="col-md-12 select-outer">
+            <label for="">
+                選択 <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
             <select name="contact_category" id="" class="orginal-input-style">
-                <option value="">内容を選択してくだい</option>
+                <option disabled selected>内容を選択してくだい</option>
                 {% for category in categorise %}
-                    <option value="{{category.id}}" data-contact_category="{{category.option}}">{{category.option}}</option>
+                    <option value="{{category.id}}" data-contact_category="{{category.option}}" required>{{category.option}}</option>
                 {% endfor %}
             </select>
         </div>
@@ -62,6 +88,13 @@
 </form>
 
 
+{% if request.session.post_error2 %}
+{% block extra_js %}
+    <script>
+        alert('エラーが発生しため送信できませんでした');
+    </script>    
+{% endblock %}
+{% endif %}
 
 <!-- 確認画面 -->
 {% include 'contact_form/contact_confirm.html' %}

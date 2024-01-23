@@ -139,6 +139,14 @@
 </form>
 
 
+{% if request.session.post_error1 %}
+{% block extra_js %}
+    <script>
+        alert('エラーが発生しため送信できませんでした');
+    </script>    
+{% endblock %}
+{% endif %}
+
 
 <!-- 確認画面 -->
 {% include 'trial_class_reservation/reservation_confirm.html' %}
