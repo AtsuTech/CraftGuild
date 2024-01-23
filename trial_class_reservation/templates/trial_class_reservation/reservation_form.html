@@ -30,23 +30,27 @@
         input[type="radio"]:checked + label.contents-label {
             background-color: #FFC7C2; /* 選択時の背景色 */
         }
+
+        .invalid {
+            border: 1px solid red;
+        }
     </style>
 {% endblock %}
 
-<form action="#" id="reservation">
+<form id="reservation" novalidate>
 
     <div class="row /mt-4">
-        <div class="col-md-6">
+        <div class="col-md-6 form-group">
             <label for="">
                 お子様の氏名(漢字) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
             </label>
-            <input type="text" name="child_name1" class="orginal-input-style">
+            <input type="text" name="child_name1" class="form-control orginal-input-style" placeholder="田中 一郎" required>
         </div>
         <div class="col-md-6">
             <label for="">
                 お子様の氏名(ふりがな) <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
             </label>
-            <input type="text" name="child_name2" class="orginal-input-style">
+            <input type="text" name="child_name2" class="orginal-input-style" required>
         </div>
     </div>
 
@@ -104,7 +108,7 @@
             {% for content in contents %}
             
                 <div>
-                    <input type="radio" id="content{{ content.id }}" name="content" value="{{content.id}}" data-content="{{content.id}}{{content.name}}" style="display: none;">
+                    <input type="radio" id="content{{ content.id }}" name="content" value="{{content.id}}" data-content="{{content.id}}{{content.name}}" style="display: none;" required>
                     <label for="content{{ content.id }}" class="contents-label">
                         {% if content.image %}
                         <img src="{{ content.image.url }}" alt="イメージ画像" width="100%" height="80px" style="object-fit: cover;">

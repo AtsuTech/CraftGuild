@@ -142,11 +142,11 @@ def post_reservation_form(request):
                 return redirect('/reservation/complete')  # 保存後、一覧ページにリダイレクトするように変更
             else:
                 #満員の時は予約フォーム画面に戻す
-                return redirect('/resavation/')
+                return redirect('/trial_class/')
     else:
         form = PostReservationForm()
 
-    return render(request, 'trial_class_reservation/reservation_form_page.html', {'form': form})
+    return redirect('/trial_class/')
 
 
 #送信完了後の処理
