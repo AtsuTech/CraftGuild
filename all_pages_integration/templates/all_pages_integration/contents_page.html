@@ -23,12 +23,12 @@
                     <div class="/p-4 /d-flex align-items-center justify-content-center">
 
                         <div>
-                            <div class="card-title h2 text-center pt-5 pb-5">
+                            <div class="card-title h1 font-1 text-center pt-5 pb-5">
                                 {{ content.contents_name }}
                             </div>
 
-                            {% image content.cover_image fill-300x300 as cover_image %}
-                            <img class="d-block w-100" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="70%" height="250px">
+                            {% image content.cover_image fill-400x300 as cover_image %}
+                            <img class="d-block w-100 img-style-cover" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="70%" height="250px">
 
                             <p>{{ content.explanation|richtext }}</p>
 

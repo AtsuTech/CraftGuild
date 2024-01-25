@@ -1,13 +1,54 @@
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <title>ログイン</title>
-</head>
-<body>
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">ログイン</button>
-    </form>
-</body>
-</html>
+
+{% extends "base.html" %}
+{% load static %}
+
+<!-- 画像処理 -->
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
+{% block content %}
+
+<main>
+
+    <!-- タイトル部分 -->
+    {% include "components/page_header.html" with header="ログイン" %}
+
+    <!-- 体験の流れ -->
+
+
+    <!-- 申し込みフォーム -->
+    <div class="theme-bg-orange">
+
+        <div class="container">
+
+            <div class="d-flex align-items-center justify-content-center" style="height: 500px;">
+
+                <form method="post" action="{% url 'accounts:login' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <div>
+                            <input type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" required id="id_username" class="orginal-input-style" placeholder="ユーザー名">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div>
+                            <input type="password" name="password" autocomplete="current-password" required id="id_password" class="orginal-input-style" placeholder="パスワード">
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-center justify-content-center" style="height: 100px;">
+                        <button type="submit" class="orinal-button bg-white">ログイン</button>
+                    </div>
+                    
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+{% endblock %}

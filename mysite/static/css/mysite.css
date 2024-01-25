@@ -20,10 +20,21 @@ main{
     /* background: #FFCC66; */
 }
 
-.logo-title{
+.font-b{
+    font-weight: bold;
+}
+
+/* -- フォント:Yuji Boku -- */
+.font-1{
     font-family: 'Bai Jamjuree', sans-serif;
     font-family: 'Carattere', cursive;
-    font-family: 'Caveat', cursive;
+    font-family: 'Dancing Script', cursive;
+    font-family: 'Rubik Doodle Shadow', system-ui;
+    font-family: 'Yuji Boku', serif;
+}
+
+.ft-20p{
+    font-size:20px;
 }
 
 /* フォント極小 */

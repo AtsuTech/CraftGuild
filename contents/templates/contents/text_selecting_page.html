@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
+<!-- 画像処理 -->
 {% load wagtailcore_tags wagtailimages_tags %}
+
 
 
 {% block content %}
@@ -15,15 +17,8 @@
     
     </div>
 
-    <div>
-
-        <div class="container">
-            <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                <h1>{{ page.contents_name }}</h1>
-            </div>
-        </div>
-    
-    </div>
+    <!-- タイトル部分 -->
+    {% include "components/page_header.html" with header=page.contents_name %}
 
     {% if user.is_authenticated %}
 
@@ -31,14 +26,31 @@
         {% for category in categories.all %}
         <div {% if forloop.counter|divisibleby:2 %}class="theme-bg-gray"{% else %}class="theme-bg-orange"{% endif %}>
             <div class="container">
-                <div class="h2">{{category.name}}{{category.id}}</div>
+                {% include "components/menu_title_component.html" with menu_title=category.name %}
                 {% for text in texts.all %}
                     
                     {% if category.id == text.categories_id %}
-                        <div>{{text.text_name}}{{text.categories_id}}</div>
-                        <a href="{% pageurl text %}">{{ text.text_name }}</a>
-                    {% endif %}
+                        <a href="{% pageurl text %}" style="text-decoration: none;" class="text-muted">
+                            <div class="/card" style="width: 18rem;">
+                                {% image text.cover_image fill-400x300 as cover_image %}
+                                <img src="{{cover_image.url}}" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <div class="h4 text-center p-4">{{ text.text_name }}</div>
+                                </div>
+                            </div>
 
+                            {% with tags=text.tags.all %}
+                                {% if tags %}
+                                    <div class="tags pb-3" style="width:200px;">
+                                        {% for tag in tags %}
+                                            <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            {% endwith %}
+                        </a>
+                    {% endif %}
+                    
                 {% endfor %}
             </div>
         </div>
