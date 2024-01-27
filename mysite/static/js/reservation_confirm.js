@@ -15,6 +15,8 @@ reservation_form.onsubmit = function(e){
     //フォーム送信による画面更新を無効
     e.preventDefault();
 
+
+
     //フォームから入力内容取得
     //if(!reservation_form.child_name1.value) validation['child_name1'] ="お子様の氏名(漢字)は必須です"
     const child_name1 = reservation_form.child_name1.value;
@@ -68,6 +70,10 @@ reservation_form.onsubmit = function(e){
         document.getElementById("confirm_comment").textContent = comment;
         document.getElementById("comment").value = comment;
 
+
+        confirm_reservation.style.display = "block";
+        reservation_form.style.display = "none";
+
     }
 
     if (reservation_form.checkValidity()) {
@@ -76,4 +82,11 @@ reservation_form.onsubmit = function(e){
 
 
 
+}
+
+
+function back_reservation_input(){
+    confirm_reservation.style.display = "none";
+    reservation_form.style.display = "block";
+    // alert('sss');
 }

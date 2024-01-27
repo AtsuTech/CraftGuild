@@ -61,11 +61,12 @@ def reservation_form_page(request):
     week_day_array = generate_date_array()                
 
     #時間割のデータをDBより取得
-    timeslots = TimeSlot.objects.all()
+    timeslots = TimeSlot.objects.all().order_by('start_time').reverse()
 
     #スケジュールのデータをDBより取得
     schedules = Schedule.objects.all()
 
+    #コンテンツの選択肢をDBより取得
     contents = Content.objects.all()
 
     return render(
@@ -148,9 +149,15 @@ def post_reservation_form(request):
 
     #ここは、エラーの時の処理
     #request.session['post_error1'] = True
-    return redirect('/trial_class/')
+    return redirect('/reservation/error')
 
 
 #送信完了後の処理
 def post_complete(request):
     return render(request, 'trial_class_reservation/reservation_complete.html')
+
+
+
+#エラー時の画面表示
+def error(request):
+    return render(request, 'trial_class_reservation/error.html')

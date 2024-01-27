@@ -43,18 +43,22 @@ def post_cotact_form(request):
             ]
             send_mail(subject, message, from_email, recipient_list, fail_silently=False)
 
-
-            return redirect('/contact/complete')  # 保存後、一覧ページにリダイレクトするように変更
+            # 送信成功の遷移先
+            return redirect('/contact/complete')  
 
     else:
         form = PostContactForm()
 
     #ここは、エラーの時の処理
-    request.session['post_error2'] = True
-    return redirect('/contact')
+    return redirect('/contact/error')
     
 
 
 # 送信完了画面
 def post_complete(request):
     return render(request, 'contact_form/contact_complete.html')
+
+
+#エラー画面
+def error(request):
+    return render(request, 'contact_form/error.html')

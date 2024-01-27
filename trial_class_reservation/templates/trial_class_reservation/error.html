@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 {% load static %}
 
+<!-- 画像処理 -->
+{% load wagtailcore_tags wagtailimages_tags %}
+
+
 {% block content %}
 
 <div style="background:#FFF;">
@@ -9,11 +13,11 @@
         <div class="d-flex align-items-center justify-content-center" style="height: 700px;">
             <div>
                 <div class="h5">
-                    体験授業の予約が完了しました。
+                    エラーが発生したため、送信できませんでした
                 </div>
                 
                 <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                    <a class="orinal-button" href="/trial_class/" role="button">OK</a>
+                    <a class="orinal-button" href="/trial_class/" role="button">もどる</a>
                 </div>
             </div>
         </div>

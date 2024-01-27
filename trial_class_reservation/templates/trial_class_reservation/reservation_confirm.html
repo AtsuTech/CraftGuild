@@ -7,7 +7,7 @@
 
 
 
-<main id="confirm_reservation">
+<div id="confirm_reservation" style="display: none;">
 
     <!-- タイトル部分 -->
     <div>
@@ -96,12 +96,16 @@
                     </div>
                 </div>
 
-                <div>
+                <div class="text-center">
                     問題がなければ送信するボタンを押してください
                 </div>
 
-                <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
-                    <button type="submit" class="orinal-button bg-white">送信する</button>
+                <div class="d-flex align-items-center justify-content-center" style="height: 100px;">
+                    <button type="submit" class="orinal-button theme-bg-orange">送信する</button>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-center" style="height: 100px;">
+                    <div class="orinal-button bg-white" onclick="back_reservation_input()">やり直す</div>
                 </div>
                 
             </form>
@@ -109,6 +113,6 @@
 
     </div>
 
-</main>
+</div>
 
 

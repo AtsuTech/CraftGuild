@@ -55,7 +55,7 @@
                         {% for week_day_arry in week_day_arry%}
                             <td  style="width: 30px; padding: 0;">
                             {% for schedule in schedules %}
-                                {% if schedule.timeslot_id == timeslot.id and schedule.date|date:"Y-m-d" == week_day_arry %}
+                                {% if schedule.timeslot_id == timeslot.id and schedule.date|date:"Y-m-d" == week_day_arry and schedule.available%}
                                 <input type="radio" id="select{{schedule.id}}" name="schedule" value="{{schedule.id}}" data-schedule="{{schedule.date}} {{timeslot.start_time}} 〜 {{timeslot.end_time}}" required/>
                                 <label for="select{{schedule.id}}" class="custom-radio-label">◯</label>
                                 {% else %}  
