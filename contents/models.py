@@ -37,7 +37,7 @@ class ContentsSelectingPage(Page):
 
     #ページのタイトル
     page_title = models.CharField(
-        verbose_name="ここには”コンテンツ一覧”と入力してください",
+        verbose_name="ここには”コンテンツ一覧”と入力",
         max_length=100,
         blank=True,
         null=True,
@@ -61,12 +61,27 @@ class ContentsSelectingPage(Page):
 
         return context        
     
+# コンテンツのタグ
+class ContentsTag(TaggedItemBase):
+    content_object = ParentalKey(
+        'ContentsDetailPage',
+        related_name='tagged_items',
+        on_delete=models.CASCADE
+    )
+
+@register_snippet
+class ContentsTags(TaggitTag):
+    class Meta:
+        proxy = True
+        #管理画面での表示
+        verbose_name = "コンテンツのタグ"
+        verbose_name_plural = "コンテンツのタグ管理"
+    
 #コンテンツの詳細のページ
 class ContentsDetailPage(Page):
 
-    #template = "mentor/mentor_detail_page.html"
+    #表示に使うテンプレート
     template = "contents/text_selecting_page.html"
-    #template = "contents/contents_detail_page.html"
 
     #追加できる子ページの種類を制限
     subpage_types = [
@@ -83,7 +98,7 @@ class ContentsDetailPage(Page):
     )
 
     #　コンテンツの紹介文
-    explanation = RichTextField(
+    explanation = models.TextField(
         verbose_name="コンテンツの説明",
         blank=True,
         null=True,
@@ -99,12 +114,28 @@ class ContentsDetailPage(Page):
         on_delete=models.SET_NULL,
     )
 
+    #　タグ
+    tags = ClusterTaggableManager(
+        verbose_name="タグ",
+        through=ContentsTag, 
+        blank=True
+    )
+
+    #　コンテンツの紹介文
+    note = models.TextField(
+        verbose_name="備考",
+        blank=True,
+        null=True,
+    )
+
 
     #管理画面で編集可能にするテーブルのカラム
     content_panels = Page.content_panels + [
         FieldPanel("contents_name"),
         FieldPanel("explanation"),
         FieldPanel("cover_image"),
+        FieldPanel("tags"),
+        FieldPanel("note"),
     ]
 
     def get_context(self, request, *args, **kwargs):

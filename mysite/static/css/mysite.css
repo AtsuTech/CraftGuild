@@ -182,3 +182,9 @@ main{
     object-fit: cover;
 }
 
+/* mobile */
+@media only screen and (max-width: 868px) {
+    .res-text-center{
+        text-align:center;
+    }
+}

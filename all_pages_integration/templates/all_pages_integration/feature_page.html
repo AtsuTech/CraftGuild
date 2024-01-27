@@ -16,7 +16,7 @@
         
         <div class="row">
             {% for content in contents %}
-                {% include "components/card_horizon_img_left.html" with img_src=content.cover_image card_title=content.contents_name card_body=content.explanation %}
+                {% include "components/card_horizon_img_left.html" with content=content %}
             {% endfor %}
         </div>
             
