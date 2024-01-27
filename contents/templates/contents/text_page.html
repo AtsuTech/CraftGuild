@@ -12,12 +12,18 @@
 
 <main>
     {% if user.is_authenticated %}
-        <div style="background:#FFF;">
-
+        <div>
             <div class="container">
-                <p><a href="{{ page.get_parent.url }}">{{ page.title }}に戻る</a></p>
+                <div class="container">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{% url 'all_pages_integration:contents_page' %}">コンテンツ</a></li>
+                        <li class="breadcrumb-item"><a href="{{ page.get_parent.url }}">{{ page.get_parent.slug }}</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+                        </ol>
+                    </nav>
+                </div>
             </div>
-        
         </div>
         
         <!-- タイトル部分 -->
@@ -37,10 +43,8 @@
 
         </div>
 
-        {% if not page.categories.id == 1 and user.user_type == 1 %}
-
+        {% if not page.categories.id == 1 and user.user_type == 1 and not user.is_superuser %}
             {% include 'contents/unable_view_alert.html' %}
-            
         {% else %}
         <div class="theme-bg-orange pb-4">
 

@@ -10,12 +10,16 @@
 <div>
 
     <div>
-
         <div class="container">
-            <p><a href="{{ page.get_parent.url }}">←コンテンツ一覧に戻る</a></p>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'all_pages_integration:contents_page' %}">コンテンツ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{page.contents_name}}</li>
+                </ol>
+            </nav>
         </div>
-    
     </div>
+
 
     <!-- タイトル部分 -->
     {% include "components/page_header.html" with header=page.contents_name %}
@@ -24,47 +28,58 @@
 
         
         {% for category in categories.all %}
-        <div {% if forloop.counter|divisibleby:2 %}class="theme-bg-gray"{% else %}class="theme-bg-orange"{% endif %}>
-            <div class="container">
-                {% include "components/menu_title_component.html" with menu_title=category.name %}
-                {% for text in texts.all %}
-                    
-                    {% if category.id == text.categories_id %}
-                        <a href="{% pageurl text %}" style="text-decoration: none;" class="text-muted">
-                            <div class="/card" style="width: 18rem;">
-                                {% image text.cover_image fill-400x300 as cover_image %}
-                                <img src="{{cover_image.url}}" class="card-img-top" alt="...">
-                                <div class="card-body">
-                                    <div class="h4 text-center p-4">{{ text.text_name }}</div>
-                                </div>
+            <div {% if forloop.counter|divisibleby:2 %}class="theme-bg-gray"{% else %}class="theme-bg-orange"{% endif %}>
+                <div class="container">
+                    <div class="w-full row pb-3">  
+                        
+                        <div class="d-flex align-items-center justify-content-center" style="height: 200px;">
+                            <div class="text-center">
+                                <span>
+                                    <small class="small">
+                                        <span class="font-1 ft-20p">{{page.contents_name}}</span>での
+                                    </small>
+                                </span>
+                                <br>
+                                <span class="h1">
+                                    {{category.name}}
+                                </span>
                             </div>
+                        </div>   
+                        {% for text in page.get_children.specific %}  
 
-                            {% with tags=text.tags.all %}
-                                {% if tags %}
-                                    <div class="tags pb-3" style="width:200px;">
-                                        {% for tag in tags %}
-                                            <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
-                                        {% endfor %}
+                            {% if category.id == text.categories_id %}
+
+                                <a href="{% pageurl text %}" style="text-decoration: none;" class="text-muted col-md-3 mb-3">
+                                    <div class="p-2">
+                                        {% image text.cover_image fill-400x300 as cover_image %}
+                                        <img src="{{cover_image.url}}" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                            <div class="h4 text-center p-4">{{ text.text_name }}</div>
+                                        </div>
+
+                                        <div class="tags pb-3" style="width:200px;">
+                                            {% with tags=text.tags.all %}
+                                                {% if tags %}
+                                                    {% for tag in tags %}
+                                                        <span class="badge bg-light text-dark shadow">{{ tag }}</span>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            {% endwith %}
+                                        </div>
+
                                     </div>
-                                {% endif %}
-                            {% endwith %}
-                        </a>
-                    {% endif %}
-                    
-                {% endfor %}
-            </div>
-        </div>
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>   
         {% endfor %}
-
         
     {% else %}
         {% include 'accounts/login_required.html' %}
     {% endif %}
 </div>
-
-
-
-
 
 
 {% endblock %}

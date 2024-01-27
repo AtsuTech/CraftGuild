@@ -15,14 +15,11 @@ from wagtail.snippets.models import register_snippet
 
 from wagtailmarkdown.fields import MarkdownField
 
-#from django.http import HttpResponseRedirect
-from django.shortcuts import redirect  
-from django.shortcuts import render
-from django.http import HttpResponse
-#from django.contrib.auth.mixins import LoginRequiredMixin
+# from django.shortcuts import redirect  
+# from django.shortcuts import render
+# from django.http import HttpResponse
 
 from django.contrib.auth.decorators import login_required
-#from wagtail.core import views as wagtail_views
 
 
 
@@ -69,6 +66,7 @@ class ContentsDetailPage(Page):
 
     #template = "mentor/mentor_detail_page.html"
     template = "contents/text_selecting_page.html"
+    #template = "contents/contents_detail_page.html"
 
     #追加できる子ページの種類を制限
     subpage_types = [
@@ -112,12 +110,15 @@ class ContentsDetailPage(Page):
     def get_context(self, request, *args, **kwargs):
         context = super().get_context(request, *args, **kwargs)
 
-        categories = TextCategory.objects
-        texts = TextPage.objects
 
+        # カテゴリとテキストのクエリ
+        categories = TextCategory.objects.all()
+        texts = TextPage.objects.live().public()
 
-        #postsを"contents"という名前で子ページで取り扱うようにする
-        context["categories"] = categories
+        # 親(ContentsDetailPage)の子ページ(TextPage)で使用されているカテゴリだけを抽出
+        categories_with_related_texts = categories.filter(textpage__in=self.get_children().specific(), textpage__categories__isnull=False).distinct()
+
+        context["categories"] = categories_with_related_texts
         context["texts"] = texts
         
         return context
