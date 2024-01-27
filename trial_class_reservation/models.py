@@ -106,7 +106,6 @@ class ReservationForm(models.Model):
     )
 
     email = models.EmailField(
-        # "Email Address",
         verbose_name="メールアドレス"
     )
 
@@ -122,15 +121,13 @@ class ReservationForm(models.Model):
     )
 
     content = models.ForeignKey(
-        #TextCategory,
         Content,
         on_delete=models.CASCADE,
         verbose_name="コンテンツのカテゴリ選択",
         default=1
-        #blank=True
     )
 
     comment = models.TextField(
-        # "Content",
-        verbose_name="自由記入欄"
+        verbose_name="自由記入欄",
+        null=True,
     )

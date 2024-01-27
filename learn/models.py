@@ -13,8 +13,8 @@ class LearnItemList(Page):
         "learn.LearnItem",
     ]
 
-
-    page_title = models.CharField( max_length=255, verbose_name="ページのタイトル")
+    #ページのタイトル
+    page_title = models.CharField( max_length=255, verbose_name="ページのタイトル(身につくこと)")
 
     #管理画面で編集可能にするテーブルのカラム
     content_panels = Page.content_panels + [

@@ -27,17 +27,17 @@ class TrialFlowBlock(Page):
     #体験の流れのタイトル
     flow_title = models.CharField( max_length=255, verbose_name="体験の流れのタイトルのタイトル(例:体験授業60分)")
 
-    #サブタイトル
-    sub_title = RichTextField(
-        verbose_name="サブタイトル(例:STEP1)",
-        blank=True,
-        null=True,
-    )
+    #サブタイトル1行目
+    sub_title1 = models.CharField( max_length=255, default="",verbose_name="サブタイトル(例:STEP1)")
+
+    #サブタイトル2行目
+    sub_title2 = models.CharField( max_length=255, default="",verbose_name="サブタイトル(例:導入の20分)")
 
     #サブタイトルの背景色
     sub_title_color = models.CharField( 
         max_length=255, 
         verbose_name="サブタイトルの背景カラー",
+        default="#BDE3FF",
         choices=[
             ('#BDE3FF', 'スカイブルー'),
             ('#FCD19C', 'オレンジ'),
@@ -74,7 +74,8 @@ class TrialFlowBlock(Page):
     #管理画面で編集可能にするテーブルのカラム
     content_panels = Page.content_panels + [
         FieldPanel("flow_title"),
-        FieldPanel("sub_title"),
+        FieldPanel("sub_title1"),
+        FieldPanel("sub_title2"),
         FieldPanel("sub_title_color"),
         FieldPanel("cover_image"),
         FieldPanel("description"),

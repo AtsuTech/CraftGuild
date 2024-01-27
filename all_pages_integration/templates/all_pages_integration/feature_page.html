@@ -47,19 +47,22 @@
     <div class="container">
         {% for creation_flow_block in creation_flow_blocks %}
             <div style="position: relative;">
-                <div class="circle-title bg-skyblue d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;">
+                <div class="circle-title bg-skyblue d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;background: {{creation_flow_block.sub_title_color}};">
                     <div class="text-center">
                         <span>
-                            <small class="small">{{creation_flow_block.sub_title}}</small>
+                            <small class="small">{{creation_flow_block.sub_title1}}</small><br>
+                            <small class="fs-4"><b>{{creation_flow_block.sub_title2}}</b></small>
                         </span>
                     </div>
                 </div>
                 <div class="rounded-box bg-white d-flex align-items-center justify-content-center">
                     <div>
                         <div class="h3 text-center mt-5">{{creation_flow_block.flow_title}}</div>
-                        {% for child_page in creation_flow_block.get_children.specific %}
-                            {% include "components/card_vertical_img_top.html" with img_src=child_page.cover_image card_title=child_page.flow_item card_body=child_page.description %}
-                        {% endfor %}    
+                        <div class="row">
+                            {% for child_page in creation_flow_block.get_children.specific %}
+                                {% include "components/card_vertical_img_top.html" with img_src=child_page.cover_image card_title=child_page.flow_item card_body=child_page.description %}
+                            {% endfor %}    
+                        </div>
                     </div>
                 </div>
             </div>

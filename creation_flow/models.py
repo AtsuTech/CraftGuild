@@ -13,8 +13,8 @@ class CreationFlow(Page):
         "creation_flow.CreationFlowBlock",
     ]
 
-
-    page_title = models.CharField( max_length=255, verbose_name="ページのタイトル")
+    #ページのタイトル"
+    page_title = models.CharField( max_length=255, verbose_name="ページのタイトル(作成の流れ)")
 
     #管理画面で編集可能にするテーブルのカラム
     content_panels = Page.content_panels + [
@@ -30,15 +30,42 @@ class CreationFlowBlock(Page):
         "creation_flow.CreationFlowItem",
     ]
 
+    #タイトル
     flow_title = models.CharField( max_length=255, verbose_name="作成フローのタイトル(例:ミニミッションに挑戦!)")
-    sub_title = models.CharField( max_length=255, verbose_name="サブタイトル(例:導入の20分)")
+
+    #サブタイトル1行目
+    sub_title1 = models.CharField( max_length=255,default="", verbose_name="サブタイトル1行目(例:導入の)")
+
+    #サブタイトル2行目
+    sub_title2 = models.CharField( max_length=255,default="", verbose_name="サブタイトル2行目(例:導入の20分)")
+
+    #サブタイトルの背景色
+    sub_title_color = models.CharField( 
+        max_length=255, 
+        verbose_name="サブタイトルの背景カラー",
+        default="#BDE3FF",
+        choices=[
+            ('#BDE3FF', 'スカイブルー'),
+            ('#FCD19C', 'オレンジ'),
+            ('#FCC7C2', 'ピンク'),
+            ('#99FF99', 'グリーン'),
+            ('#C299FF', 'パープル'),
+            ('#FFFF99', 'イエロー'),
+            ('#FFFFFF', 'ホワイト'),
+            ('#CCCCCC', 'グレー'),
+        ]
+    )
+
+    #最後のブロックかの判定
     order_check = models.BooleanField(verbose_name="最後のブロックかどうかの確認",default=True )
         
 
     #管理画面で編集可能にするテーブルのカラム
     content_panels = Page.content_panels + [
         FieldPanel("flow_title"),
-        FieldPanel("sub_title"),
+        FieldPanel("sub_title1"),
+        FieldPanel("sub_title2"),
+        FieldPanel("sub_title_color"),
         FieldPanel("order_check"),
     ]
 
