@@ -1,27 +1,28 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 <div style="position: relative;">
-    <div class="circle-title d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;background:{{color}}">
+    <div class="circle-title d-flex align-items-center justify-content-center" style="position: absolute;top:-30px;background:{{flow.sub_title_color}}">
         <div class="text-center">
-            <span>
-                <small class="small">{{sub|richtext}}</small>
+            <span style="line-height: 0.2;">
+                <small class="small">{{flow.sub_title1}}</small><br>
+                <b class="fs-5">{{flow.sub_title2}}</b>
             </span>
         </div>
     </div>
     <div class="rounded-box bg-white /d-flex /align-items-center justify-content-center">
 
         <div>
-            <div class="h3 text-center mt-5 mb-5">{{title}}</div> 
+            <div class="h3 text-center mt-5 mb-5">{{flow.flow_title}}</div> 
             
             <div class="col-md-6 offset-md-3">
                 <div class="row mb-5">
                     <div class="col-md-5">
-                        {% if img %}
-                            {% image img fill-300x300 as cover_image %}
+                        {% if flow.cover_image %}
+                            {% image flow.cover_image fill-300x300 as cover_image %}
                             <img src="{{ cover_image.url }}" class="card-img-top img-style-cover" alt="{{ cover_image.url }}" width="500px" height="200px">
                         {% endif %}
                     </div>
                     <div class="col-md-7">
-                        {{ body|richtext }}
+                        {{ flow.description|richtext }}
                     </div>
                 </div>
             </div>

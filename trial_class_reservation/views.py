@@ -147,7 +147,7 @@ def post_reservation_form(request):
         form = PostReservationForm()
 
     #ここは、エラーの時の処理
-    request.session['post_error1'] = True
+    #request.session['post_error1'] = True
     return redirect('/trial_class/')
 
 

@@ -25,7 +25,7 @@ code{
 }
     
 /* コードのタイトル */
-h4{
+blockquote p{
     display: inline-block;
     color: #fff;
     background:gray;
@@ -35,5 +35,8 @@ h4{
     font-size: 0.8rem;
     text-align: center;
     white-space: nowrap;
-    margin-bottom:-50px;
+    vertical-align: bottom; /* または別の値を設定 */
+    margin-bottom: -16px; /
 }
+
+

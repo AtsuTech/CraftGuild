@@ -24,33 +24,33 @@
 
         <div class="container">
 
-            <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post" class="theme-bg-orange p-3"> 
+            <form action="{% url 'trial_class_reservation:post_reservation' %}" method="post" class="theme-bg-white p-3"> 
                 
                 {% csrf_token %}
 
                 <div class="row /mt-4">
                     <div class="col-md-6">
-                        <label for="" class="ft-xsm">お子様の氏名(漢字)</label>
-                        <p id="confirm_child_name1" class="border-bottom border-dark"></p>
+                        <label for="" class="ft-xsm textr-secondary">お子様の氏名(漢字)</label>
+                        <p id="confirm_child_name1" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="child_name1" id="child_name1" value="">
                         <div id="validation_child_name1"></div>
                     </div>
                     <div class="col-md-6">
                         <label for="" class="ft-xsm">お子様の氏名(ふりがな)</label>
-                        <p id="confirm_child_name2" class="border-bottom border-dark"></p>
+                        <p id="confirm_child_name2" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="child_name2" id="child_name2" value="">
                     </div>
                 </div>
 
                 <div class="row mt-4">
                     <div class="col-md-6">
-                        <label for="">保護者の氏名(漢字)</label>
-                        <p id="confirm_parent_name1"></p>
+                        <label for="" class="ft-xsm">保護者の氏名(漢字)</label>
+                        <p id="confirm_parent_name1" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="parent_name1" id="parent_name1" value="">
                     </div>
                     <div class="col-md-6">
-                        <label for="">保護者の氏名(ふりがな)</label>
-                        <p id="confirm_parent_name2"></p>
+                        <label for="" class="ft-xsm">保護者の氏名(ふりがな)</label>
+                        <p id="confirm_parent_name2" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="parent_name2" id="parent_name2" value="">
                     </div>
                 </div>
@@ -58,23 +58,23 @@
                 <div  class="row mt-4">
                     <div  class="col-md-12">
                         <label for="" class="ft-xsm">メールアドレス</label>
-                        <p id="confirm_email" class="border-bottom border-dark"></p>
+                        <p id="confirm_email" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="email" id="email" value="">
                     </div>
                 </div>
 
                 <div  class="row mt-4">
                     <div  class="col-md-12">
-                        <label for="">電話番号</label>
-                        <p id="confirm_phone_number"></p>
+                        <label for="" class="ft-xsm">電話番号</label>
+                        <p id="confirm_phone_number" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="phone_number" id="phone_number" value="">
                     </div>
                 </div>
 
                 <div  class="row mt-4">
                     <div  class="col-md-12">
-                        <label for="">希望の日程</label>
-                        <p id="confirm_schedule"></p>
+                        <label for="" class="ft-xsm">希望の日程</label>
+                        <p id="confirm_schedule" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="schedule" id="schedule" value="">
                     </div>
                 </div>
@@ -82,16 +82,16 @@
 
                 <div  class="row mt-4">
                     <div  class="col-md-12">
-                        <label for="">コンテンツ</label>
-                        <p id="confirm_content"></p>
+                        <label for="" class="ft-xsm">コンテンツ</label>
+                        <p id="confirm_content" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="content" id="content" value="">
                     </div>
                 </div>
 
                 <div  class="row mt-4">
                     <div  class="col-md-12">
-                        <label for="">自由記入欄</label>
-                        <p id="confirm_comment"></p>
+                        <label for="" class="ft-xsm">自由記入欄</label>
+                        <p id="confirm_comment" class="border-bottom border-secondary-subtle"></p>
                         <input type="hidden" name="comment" id="comment" value="">
                     </div>
                 </div>

@@ -19,7 +19,7 @@
                         <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="{% url 'all_pages_integration:contents_page' %}">コンテンツ</a></li>
                         <li class="breadcrumb-item"><a href="{{ page.get_parent.url }}">{{ page.get_parent.slug }}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
+                        <li class="breadcrumb-item active" aria-current="page">テキスト:{{ page.title }}</li>
                         </ol>
                     </nav>
                 </div>
@@ -49,22 +49,11 @@
         <div class="theme-bg-orange pb-4">
 
             <div class="container">
-                <div>
-                    <!-- Add this: -->
-                    {% with tags=page.tags.all %}
-                    {% if tags %}
-                        <div class="tags">
-                            {% for tag in tags %}
-                                <a href=""><span class="badge bg-secondary">{{ tag }}</span></a>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
-                    {% endwith %}
-                </div>
+
 
                 <div class="/mt-4 /mb-4">
-                    {% image page.cover_image fill-300x300 as cover_image %}
-                    <img class="/cover-img mt-4" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100%" height="300px">    
+                    {% image page.cover_image fill-1000x300 as cover_image %}
+                    <img class="img-style-cover mt-4" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="100%" height="300px">    
                 </div>
                 
                 <div class="row mt-4">
@@ -78,7 +67,11 @@
 
                     <!-- 目次 -->
                     <div class="col-md-4">
-                        <div class="rendered-toc bg-white rounded-3"></div>
+                        
+                        <div class="bg-white p-2 rounded-3">
+                            <div class="fs-5 mb-3">目次</div>
+                            <div class="rendered-toc"></div>
+                        </div>
                     </div>
                 </div>                 
             

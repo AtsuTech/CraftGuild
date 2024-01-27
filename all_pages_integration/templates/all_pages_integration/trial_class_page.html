@@ -20,7 +20,7 @@
 
             {% for flow in flows %}
 
-                {% include "components/block_horizon_img_left_with_bage.html" with title=flow.flow_title sub=flow.sub_title color=flow.sub_title_color img=flow.cover_image body=flow.description %}
+                {% include "components/block_horizon_img_left_with_bage.html" with flow=flow %}
                 
                 <!-- ドッドの矢印 -->
                 {% if not flow.order_check %}

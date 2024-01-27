@@ -29,8 +29,9 @@
     
         // 元の要素が存在し、レンダリング先の要素が存在する場合
         if (originalElement && renderedTocElement) {
-            // クラス名を変更
-            originalElement.classList.add('hidden');
+
+            // 元の要素を削除
+            originalElement.remove();
             
             // 元の要素をクローンしてレンダリング先に追加
             var clonedToc = originalElement.cloneNode(true);

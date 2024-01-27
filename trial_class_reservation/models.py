@@ -130,4 +130,5 @@ class ReservationForm(models.Model):
     comment = models.TextField(
         verbose_name="自由記入欄",
         null=True,
+        blank=True, 
     )

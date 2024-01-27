@@ -1,8 +1,43 @@
-.hidden{
-    display:hidden;
-    /* visibility:hidden */
-}
 
 .rendered-toc{
-    border:solid 2px #000;
+    /* border:solid 2px #000; */
+}
+
+
+.toc ul li{
+    list-style-type: none;
+}
+
+.toc ul li::marker{
+    /* content: '\2523';
+    color:red; */
+    /* content: '1'; */
+    /* width:2px;
+    height:10px;
+    background:red; */
+} 
+
+
+
+.toc ul li a{
+    width:100%;
+    line-height:45px;
+    text-decoration: none;
+    color: #555;
+    display:block;
+    border-left:solid 2px #33CCFF;
+    position:relative;
+    padding-left:20px;
+}
+
+.toc ul li a::after{
+    content: '';
+    width:10px;
+    height:10px;
+    background:#0099FF;
+    position:absolute;
+    border-radius:5px;
+    border:solid 1px #fff;
+    top:17px;
+    left:-6px;
 }

@@ -27,8 +27,15 @@
                                 {{ content.contents_name }}
                             </div>
 
-                            {% image content.cover_image fill-400x300 as cover_image %}
-                            <img class="d-block w-100 img-style-cover" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" width="70%" height="250px">
+
+                            {% if content.cover_image %}
+                            {% image content.cover_image fill-1000x300 as cover_image %}
+                                <img class="d-block w-100 img-style-cover" src="{{ cover_image.url }}" alt="{{ cover_image.alt }}" height="250px">
+                            {% else %}
+                                <div class="d-flex w-100 bg-secondary align-items-center justify-content-center" style="height: 250px;">
+                                    <p>No Image</p>
+                                </div>
+                            {% endif %}
 
                             <p>{{ content.explanation|richtext }}</p>
 

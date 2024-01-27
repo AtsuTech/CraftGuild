@@ -178,6 +178,7 @@ main{
     height: 300px;
 }
 
+/* 画像フィット表示処理 */
 .img-style-cover{
     object-fit: cover;
 }
