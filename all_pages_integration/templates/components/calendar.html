@@ -1,5 +1,5 @@
 <table class="table table-bordered /border-3 mb-3">
-    <thead>
+    <thead class="text-center">
         <tr>
             <th scope="col" style="width: 14.29%;">月</th>
             <th scope="col" style="width: 14.29%;">火</th>
@@ -16,15 +16,21 @@
             <tr>
                 {% for day_data in week %}
                     {% if day_data.day_off %}
-                        <td style="padding: 0;">
-                            <div  style="width: 100%; height:60px; background:  #777;">
+                        <td style="padding: 0;" class="/text-center">
+                            {% comment %} <div  style="width: 100%; height:60px; background:  #777;">
                                 {{ day_data.day }}
+                            </div> {% endcomment %}
+                            <div class="d-flex align-items-center justify-content-center pt-3" style="height: 60px; background:  #777;">
+                                <p class="fs-4 text-white">{{ day_data.day }}</p>
                             </div>
                         </td>
                     {% else %}
                         <td style="padding: 0;">
-                            <div  style="width: 100%; height:60px;">
+                            {% comment %} <div  style="width: 100%; height:60px;">
                                 {{ day_data.day }}
+                            </div> {% endcomment %}
+                            <div class="d-flex align-items-center justify-content-center pt-3" style="height: 60px;">
+                                <p class="fs-4">{{ day_data.day }}</p>
                             </div>
                         </td>
                     {% endif %}

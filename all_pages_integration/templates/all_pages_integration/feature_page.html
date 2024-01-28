@@ -31,7 +31,7 @@
 
         <div class="row d-flex align-items-center justify-content-center">
             {% for learn in learns %}
-                {% include "components/card_vertical_img_top.html" with img_src=learn.cover_image card_title=learn.item card_body=learn.description %}
+                {% include "components/learn_card.html" with learn=learn %}
             {% endfor %}            
         </div>
 
@@ -60,7 +60,7 @@
                         <div class="h3 text-center mt-5">{{creation_flow_block.flow_title}}</div>
                         <div class="row">
                             {% for child_page in creation_flow_block.get_children.specific %}
-                                {% include "components/card_vertical_img_top.html" with img_src=child_page.cover_image card_title=child_page.flow_item card_body=child_page.description %}
+                                {% include "components/flow_card.html" with flow=child_page %}
                             {% endfor %}    
                         </div>
                     </div>

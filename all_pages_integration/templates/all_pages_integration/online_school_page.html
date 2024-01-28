@@ -10,7 +10,6 @@
 <div class="theme-bg-orange pb-4">
 
     <div class="container">
-        <div class="">
 
             {% include "components/menu_title_component.html" with menu_title="時間割り" %}
             
@@ -30,7 +29,7 @@
                 </thead>
                 {% for week_data in week_array %}
                     <tr>
-                        <td>{{ week_data.time.start_time }} - {{ week_data.time.end_time }}</td>
+                        <td class="text-center">{{ week_data.time.start_time }} 〜<br> {{ week_data.time.end_time }}</td>
                         {% for day_data in week_data.days %}
                             {% if day_data.available %}
                                 <td style="font-size: 40px;" class="align-middle text-center">
@@ -44,8 +43,7 @@
                     </tr>
                 {% endfor %}
             </table>
-            </div>
-        </div>
+            <p>*火曜と水曜はお休みとなっております。</p>
     </div>
 
 </div>
@@ -78,7 +76,7 @@
 </div>
 
 
-<div class="theme-bg-gray">
+<div class="theme-bg-gray pb-5">
 
     <div class="container">
         {% include "components/menu_title_component.html" with menu_title="メンター紹介" %}
@@ -89,12 +87,20 @@
             {% if mentors.count %}
                 {% for mentor in mentors.all %}
                     
-                    <div class="col-md-3 m-5" style="width: 18rem;">
+                    <div class="col-md-3">
                         {% image mentor.image fill-300x300 as mentor_img %}
-                        <img src="{{ mentor_img.url }}" class="card-img-top rounded-circle" alt="{{ mentor_img.alt }}">
+                        <div class="d-flex align-items-center justify-content-center">
+                            {% if mentor.image %}
+                                <img src="{{ mentor_img.url }}" class="block rounded-circle" alt="{{ mentor_img.alt }}" width="250px" height="250px">
+                            {% else %}
+                                <div class="d-flex align-items-center justify-content-center rounded-circle bg-secondary" style="width: 250px;height: 250px;">
+                                    <p class="text-center">No Image</p>
+                                </div>
+                            {% endif %}
+                        </div>
                         <div class="card-body">
-                            <div class="card-title text-center h4 /border-bottom /border-3 /border-dark pt-3 pb-3">
-                                <a href="{% pageurl mentor %}">{{ mentor.name }}</a>
+                            <div class="card-title text-center h4 pt-3 pb-3">
+                                {{ mentor.name }}
                             </div>
                             
                             <div class="card-text text-center">
