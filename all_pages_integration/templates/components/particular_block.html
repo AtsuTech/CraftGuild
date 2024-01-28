@@ -1,0 +1,26 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+<div>
+    <div class="rounded-box bg-white d-flex align-items-center justify-content-center"> 
+        <div class="w-100 p-5">
+            <div class="h3 text-center mt-5 mb-5">{{particular.particular_title}}</div>
+
+            <div class="row mb-5">
+                <div class="col-md-4">
+                    {% if particular.cover_image %}
+                        {% image particular.cover_image fill-300x300 as cover_image %}
+                        <img src="{{ cover_image.url }}" class="card-img-top img-style-cover" alt="{{ cover_image.url }}" height="200px">
+                    {% else %}
+                        <div class="d-flex w-100 bg-secondary align-items-center justify-content-center" style="height: 200px;">
+                            <p>No Image</p>
+                        </div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    {{ particular.description }}
+                </div>
+            </div>
+    
+        </div>
+    </div> 
+</div>
+

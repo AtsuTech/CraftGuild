@@ -84,11 +84,11 @@
 
         {% include "components/menu_title_component.html" with menu_title="こだわり" %}
 
-        {% for particular_block in particular_blocks %}
-            {% include "components/block_horizon_img_left.html" with title=particular_block.particular_title img=particular_block.cover_image description=particular_block.description %}
+        {% for particular in particular_blocks %}
+            {% include "components/particular_block.html" with particular=particular %}
 
             <!-- ドッドの線 -->
-            {% if not particular_block.order_check %}
+            {% if not particular.order_check %}
                 {% include "components/vertical_dod_line.html" %}
             {% endif %}
         {% endfor %}

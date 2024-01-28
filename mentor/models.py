@@ -76,7 +76,7 @@ class MentorDetailPage(Page):
 
 
     # メンターの紹介文
-    explanation = RichTextField(
+    explanation = models.TextField(
         verbose_name="メンターの紹介文",
         blank=True,
         null=True,

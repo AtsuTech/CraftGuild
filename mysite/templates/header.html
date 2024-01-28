@@ -37,7 +37,7 @@
                             <a class="nav-link" href="/contents/">コンテンツ</a>
                         </li>
                         <li>
-                            <span class="nav-link">
+                            {% comment %} <span class="nav-link">
                                 {% if user.is_staff and user.is_active %}
                                    {{ user.get_username }}さん
                                 {% elif user.is_active %}
@@ -45,14 +45,28 @@
                                 {% else %}
                                     {{ user.get_username }}さん
                                 {% endif %}
-                            </span>
-                        </li>
-                        <li>
-                            <form action="/logout/" method="post" name="f_logout">
-                                {% csrf_token %}
-                                <input type="hidden" value="logout">
-                                <a href="javascript: if (window.confirm('ログアウトしてよろしいですか？')) {f_logout.submit()}" class="logout nav-link">ログアウト</a>
-                            </form>
+                            </span>  {% endcomment %}
+
+                            <div class="btn-group">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    {{ user.get_username }}さん
+                                </button>
+                                <div class="dropdown-menu text-center">
+                                    {% if user.is_superuser %}
+                                        <span class="badge text-bg-success">管理権限者</span>
+                                    {% elif user.user_type == 0 %}
+                                    <span class="badge text-bg-info">通塾生</span>
+                                    {% elif user.user_type == 1 %}
+                                        <span class="badge text-bg-secondary">体験</span>
+                                    {% endif %}
+                                    
+                                    <form action="/logout/" method="post" name="f_logout">
+                                        {% csrf_token %}
+                                        <input type="hidden" value="logout">
+                                        <a href="javascript: if (window.confirm('ログアウトしてよろしいですか？')) {f_logout.submit()}" class="logout nav-link">ログアウト</a>
+                                    </form>
+                                </div>
+                            </div>
                         </li>
                         
                     {% else %}
