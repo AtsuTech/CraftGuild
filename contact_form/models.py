@@ -58,7 +58,6 @@ class ContactForm(models.Model):
 
     comment = models.TextField(
         verbose_name="自由記入欄",
-        null=True,
     )
 
     def __str__(self):

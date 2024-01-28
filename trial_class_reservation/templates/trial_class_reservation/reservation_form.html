@@ -104,10 +104,10 @@
                 コンテンツ <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
             </div>
 
-            <div class="w-100 d-flex">
+            <div class="row w-100 d-flex">
             {% for content in contents %}
             
-                <div>
+                <div class="col-md-4">
                     <input type="radio" id="content{{ content.id }}" name="content" value="{{content.id}}" data-content="{{content.name}}" style="display: none;" required>
                     <label for="content{{ content.id }}" class="contents-label">
                         {% if content.image %}
@@ -146,3 +146,92 @@
 
 
 
+{% block extra_js %}
+    <script>
+        const reservation_form = document.getElementById("reservation");
+        const confirm_reservation = document.getElementById("confirm_reservation");
+        const validation  = document.getElementById("validation");
+
+
+        reservation_form.onsubmit = function(e){
+
+            //未入力
+            if (reservation_form.checkValidity() == false) {
+                alert("未入力の項目があります");
+            }
+
+            //フォーム送信による画面更新を無効
+            e.preventDefault();
+
+
+
+            //フォームから入力内容取得
+            const child_name1 = reservation_form.child_name1.value;
+            const child_name2 = reservation_form.child_name2.value;
+            const parent_name1 = reservation_form.parent_name1.value;
+            const parent_name2 = reservation_form.parent_name2.value;
+            const email = reservation_form.email.value;
+            const phone_number = reservation_form.phone_number.value;
+            const schedule = reservation_form.schedule.value;
+            const schedule_text = reservation_form.querySelector('input[name="schedule"]:checked').getAttribute('data-schedule');
+            const content = reservation_form.content.value;
+            const content_text = reservation_form.querySelector('input[name="content"]:checked').getAttribute('data-content');
+            const comment = reservation_form.comment.value;
+
+
+            
+            function MoveReservationConfim() {
+                
+                reservation_form.style.display = "none";
+                confirm_reservation.style.display = "block";
+                
+                //確認画面に値を渡す
+                document.getElementById("confirm_child_name1").textContent = child_name1;
+                document.getElementById("child_name1").value = child_name1;        
+
+                document.getElementById("confirm_child_name2").textContent = child_name2;
+                document.getElementById("child_name2").value = child_name2;
+
+                document.getElementById("confirm_parent_name1").textContent = parent_name1;
+                document.getElementById("parent_name1").value = parent_name1;
+
+                document.getElementById("confirm_parent_name2").textContent = parent_name2;
+                document.getElementById("parent_name2").value = parent_name2;
+
+                document.getElementById("confirm_email").textContent = email;
+                document.getElementById("email").value = email;
+
+                document.getElementById("confirm_phone_number").textContent = phone_number;
+                document.getElementById("phone_number").value = phone_number;
+
+                document.getElementById("confirm_schedule").textContent = schedule_text;
+                document.getElementById("schedule").value = schedule;
+
+                document.getElementById("confirm_content").textContent = content_text;
+                document.getElementById("content").value = content;
+
+                document.getElementById("confirm_comment").textContent = comment;
+                document.getElementById("comment").value = comment;
+
+
+                confirm_reservation.style.display = "block";
+                reservation_form.style.display = "none";
+
+            }
+
+            if (reservation_form.checkValidity()) {
+                MoveReservationConfim();
+            }
+
+
+
+        }
+
+
+        function back_reservation_input(){
+            confirm_reservation.style.display = "none";
+            reservation_form.style.display = "block";
+            // alert('sss');
+        }
+    </script>
+{% endblock %}

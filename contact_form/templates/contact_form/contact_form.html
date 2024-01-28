@@ -7,12 +7,14 @@
             top:35px;
             right:20px;
             color: grey;
+            pointer-events: none; 
         }
+
     </style>
 {% endblock %}
 
-<form action="#" id="contact">
-    {% csrf_token %}
+<form id="contact" novalidate>
+
     <div class="row /mt-4">
         <div class="col-md-6">
             <label for="">
@@ -66,8 +68,8 @@
             <label for="">
                 選択 <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
             </label>
-            <select name="contact_category" id="" class="orginal-input-style">
-                <option disabled selected>内容を選択してくだい</option>
+            <select name="contact_category" id="" class="orginal-input-style" required>
+                <option hidden value="-1">選択してください</option>
                 {% for category in categorise %}
                     <option value="{{category.id}}" data-contact_category="{{category.option}}" required>{{category.option}}</option>
                 {% endfor %}
@@ -77,8 +79,10 @@
 
     <div  class="row mt-4">
         <div  class="col-md-12">
-            <label for="">自由記入欄</label>
-            <textarea name="comment" id="" cols="30" rows="10" class="orginal-textarea-style"></textarea>
+            <label for="">
+                自由記入欄 <span class="badge rounded-pill text-bg-danger mb-1">必須</span>
+            </label>
+            <textarea name="comment" id="" cols="30" rows="10" class="orginal-textarea-style" required></textarea>
         </div>
     </div>
 
@@ -88,16 +92,91 @@
 </form>
 
 
-{% if request.session.post_error2 %}
-{% block extra_js %}
-    <script>
-        alert('エラーが発生しため送信できませんでした');
-    </script>    
-{% endblock %}
-{% endif %}
+
 
 <!-- 確認画面 -->
 {% include 'contact_form/contact_confirm.html' %}
 
+{% block extra_js %}
+{# Override this in templates to add extra javascript #}
+    <script>
+            
+        const contact_form = document.getElementById("contact");
+        const contact_confirm_page = document.getElementById("contact_confirm_page");
 
+        contact_form.onsubmit = function(e){
+
+            // 未入力のチェック
+            if (contact_form.checkValidity() == false) {
+                alert("未入力の項目があります");
+            }
+
+            //フォーム送信による画面更新を無効
+            e.preventDefault();
+
+            //フォームから入力内容取得
+            const child_name1 = contact_form.child_name1.value;
+            const child_name2 = contact_form.child_name2.value;
+            const parent_name1 = contact_form.parent_name1.value;
+            const parent_name2 = contact_form.parent_name2.value;
+            const email = contact_form.email.value;
+            const phone_number = contact_form.phone_number.value;
+
+            // selectオプションのテキストを取得
+            const categorySelect = contact_form.contact_category;
+            const category = categorySelect.value;
+            const category_text = categorySelect.options[categorySelect.selectedIndex].text;
+
+            const comment = contact_form.comment.value;
+
+            if(category == -1){
+                alert("未入力の項目があります");
+            }
+
+            function MoveContactConfirm(){
+                contact_form.style.display = "none";
+                contact_confirm_page.style.display = "block";
+                
+
+                //確認画面に値を渡す
+                document.getElementById("confirm_child_name1").textContent = child_name1;
+                document.getElementById("child_name1").value = child_name1;
+
+                document.getElementById("confirm_child_name2").textContent = child_name2;
+                document.getElementById("child_name2").value = child_name2;
+
+                document.getElementById("confirm_parent_name1").textContent = parent_name1;
+                document.getElementById("parent_name1").value = parent_name1;
+
+                document.getElementById("confirm_parent_name2").textContent = parent_name2;
+                document.getElementById("parent_name2").value = parent_name2;
+
+                document.getElementById("confirm_email").textContent = email;
+                document.getElementById("email").value = email;
+
+                document.getElementById("confirm_phone_number").textContent = phone_number;
+                document.getElementById("phone_number").value = phone_number;
+
+                document.getElementById("confirm_contact_category").textContent = category_text;
+                document.getElementById("contact_category").value = category;
+
+                document.getElementById("confirm_comment").textContent = comment;
+                document.getElementById("comment").value = comment;       
+            }
+
+            // 入力OKの処理
+            if (contact_form.checkValidity() && category != -1) {
+                //確認画面へ
+                MoveContactConfirm();
+            }
+
+        }
+
+
+        function back_contact_input(){
+            contact_confirm_page.style.display = "none";
+            contact_form.style.display = "block";
+        }
+    </script>    
+{% endblock %}
 
