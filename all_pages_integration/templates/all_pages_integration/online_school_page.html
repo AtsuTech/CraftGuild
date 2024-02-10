@@ -64,7 +64,17 @@
                 </div>
             </div>
         {% endfor %}
+
+        <div class="mt-3">
+            {% for description in plan_description %}
+                <p>
+                    {{description.description}}
+                </p>
+            {% endfor %}            
+        </div>
+
     </div>
+
 </div>
 
 <!-- カレンダー -->

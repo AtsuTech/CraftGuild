@@ -17,6 +17,7 @@ from particular.models import ParticularBlock #こだわりのブロック
 
 from trial_class_reservation.forms import PostReservationForm
 from price_plan.models import PricePlanBlock #料金プラン
+from price_plan.models import PriceDescription #料金プランに関する説明文
 from trial_class_reservation.models import TimeSlot #時間割モデル
 from trial_class_reservation.models import Schedule #スケジュールモデル
 from trial_class_reservation.models import Content #予約フォームモデルmoderu
@@ -67,6 +68,8 @@ def online_school_page(request):
 
     plans = PricePlanBlock.objects.live().all()
 
+    plan_description = PriceDescription.objects.live().all()
+
     mentors = MentorDetailPage.objects.live().all()
 
     #時間割表示用の配列を作成
@@ -111,6 +114,7 @@ def online_school_page(request):
         template_name="all_pages_integration/online_school_page.html",
          context={
             "plans":plans,
+            "plan_description":plan_description,
             "week_array": week_array,
             "mentors": mentors,
             "calendar_data":calendar_data,

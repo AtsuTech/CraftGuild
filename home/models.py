@@ -13,6 +13,7 @@ class HomePage(Page):
         "learn.LearnItemList",
         "particular.Particular",
         "price_plan.PricePlan",
+        "price_plan.PriceDescription",
         "trial_flow.TrialFlow",
         "question.Question",
     ]
